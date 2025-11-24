@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { writeClient } from '@/sanity/lib/client'
 import { sendEmail, generateArticleEmail, generateBookEmail } from '@/lib/email'
 
+// Webhook version: 2.0 (no filesystem operations)
 // This webhook will be called by Sanity when new content is published
 export async function POST(request: NextRequest) {
   try {
@@ -52,7 +53,9 @@ export async function POST(request: NextRequest) {
       text: emailContent.text,
     })
 
-  
+    console.log(`[Webhook v2.0] Successfully processed ${_type}: ${title}`)
+    console.log(`[Webhook v2.0] Notified ${subscribers.length} subscribers`)
+
     return NextResponse.json(
       { 
         message: 'Notification processed successfully',
