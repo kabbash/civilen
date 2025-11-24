@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { getArticleBySlug, getAllArticles } from "@/sanity/lib/fetch";
 import { urlForImage } from "@/sanity/lib/image";
 import { PortableText, portableTextComponents } from "@/sanity/lib/portableText";
+import { Article } from "@/types";
 
 interface ArticleDetailPageProps {
   params: Promise<{
@@ -14,7 +15,7 @@ interface ArticleDetailPageProps {
 // Generate static params for all articles
 export async function generateStaticParams() {
   const articles = await getAllArticles();
-  return articles.map((article) => ({
+  return articles.map((article: Article) => ({
     slug: article.slug,
   }));
 }
