@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { client } from '@/sanity/lib/client'
+import { writeClient } from '@/sanity/lib/client'
 import { sendEmail, generateArticleEmail, generateBookEmail } from '@/lib/email'
 
 // This webhook will be called by Sanity when new content is published
@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
     const slugString = slug?.current || slug
 
     // Fetch all active subscribers
-    const subscribers = await client.fetch(
+    const subscribers = await writeClient.fetch(
       `*[_type == "subscriber" && active == true]{ email }`
     )
 

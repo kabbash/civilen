@@ -10,3 +10,12 @@ export const client = createClient({
   perspective: 'published',
 })
 
+// Client with write permissions for API routes
+export const writeClient = createClient({
+  projectId,
+  dataset,
+  apiVersion,
+  useCdn: false,
+  token: process.env.SANITY_API_TOKEN,
+})
+

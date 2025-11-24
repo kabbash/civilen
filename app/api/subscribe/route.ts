@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { client } from '@/sanity/lib/client'
+import { writeClient } from '@/sanity/lib/client'
 
 export async function POST(request: NextRequest) {
   try {
@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if email already exists
-    const existingSubscriber = await client.fetch(
+    const existingSubscriber = await writeClient.fetch(
       `*[_type == "subscriber" && email == $email][0]`,
       { email }
     )
@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
       }
       
       // If exists but inactive, reactivate it
-      await client
+      await writeClient
         .patch(existingSubscriber._id)
         .set({ active: true, subscribedAt: new Date().toISOString() })
         .commit()
@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Create new subscriber
-    const result = await client.create({
+    const result = await writeClient.create({
       _type: 'subscriber',
       email,
       source,
