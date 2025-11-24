@@ -20,18 +20,37 @@ export default function ContactPage() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
+    setSubmitStatus("idle");
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSubmitStatus("success");
+        setFormData({ name: "", email: "", subject: "", message: "" });
+        
+        // Reset success message after 5 seconds
+        setTimeout(() => {
+          setSubmitStatus("idle");
+        }, 5000);
+      } else {
+        setSubmitStatus("error");
+        console.error('Error:', data.error);
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitStatus("error");
+    } finally {
       setIsSubmitting(false);
-      setSubmitStatus("success");
-      setFormData({ name: "", email: "", subject: "", message: "" });
-      
-      // Reset success message after 3 seconds
-      setTimeout(() => {
-        setSubmitStatus("idle");
-      }, 3000);
-    }, 1000);
+    }
   };
 
   return (
@@ -147,10 +166,15 @@ export default function ContactPage() {
               {isSubmitting ? "Sending..." : "Send Message"}
             </PrimaryButton>
 
-            {/* Success Message */}
+            {/* Status Messages */}
             {submitStatus === "success" && (
               <p className="text-center font-gotham-medium text-green-600">
-                Message sent successfully!
+                Message sent successfully! We&apos;ll get back to you soon.
+              </p>
+            )}
+            {submitStatus === "error" && (
+              <p className="text-center font-gotham-medium text-red-600">
+                Failed to send message. Please try again later.
               </p>
             )}
           </form>

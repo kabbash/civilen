@@ -40,9 +40,12 @@ export async function sendEmail({ to, subject, html, text }: EmailData) {
 
   const resend = new Resend(process.env.RESEND_API_KEY)
   
+  // Use environment variable or fallback to test domain
+  const fromEmail = process.env.NEWSLETTER_FROM_EMAIL || 'CivilEn Publishing <onboarding@resend.dev>'
+  
   try {
     const { data, error } = await resend.emails.send({
-      from: 'CivilEn Publishing <onboarding@resend.dev>',
+      from: fromEmail,
       to,
       subject,
       html,
