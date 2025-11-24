@@ -42,7 +42,7 @@ export async function sendEmail({ to, subject, html, text }: EmailData) {
   
   try {
     const { data, error } = await resend.emails.send({
-      from: 'CivilEn Publishing <newsletter@civilenpublishing.com>',
+      from: 'CivilEn Publishing <onboarding@resend.dev>',
       to,
       subject,
       html,
