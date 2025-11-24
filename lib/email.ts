@@ -17,6 +17,9 @@
  * 3. Uncomment and configure the sendEmail function below
  */
 
+import { Resend } from 'resend'
+
+
 interface EmailData {
   to: string[]
   subject: string
@@ -34,30 +37,27 @@ export async function sendEmail({ to, subject, html, text }: EmailData) {
   console.log('Subject:', subject)
   console.log('HTML:', html.substring(0, 100) + '...')
   
-  // TODO: Uncomment one of the implementations below based on your email service
 
-  // ===== OPTION 1: Using Resend (Recommended) =====
-  // import { Resend } from 'resend'
-  // const resend = new Resend(process.env.RESEND_API_KEY)
-  // 
-  // try {
-  //   const { data, error } = await resend.emails.send({
-  //     from: 'CivilEn Publishing <newsletter@civilenpublishing.com>',
-  //     to,
-  //     subject,
-  //     html,
-  //     text,
-  //   })
-  //   
-  //   if (error) {
-  //     throw error
-  //   }
-  //   
-  //   return { success: true, data }
-  // } catch (error) {
-  //   console.error('Email sending failed:', error)
-  //   return { success: false, error }
-  // }
+  const resend = new Resend(process.env.RESEND_API_KEY)
+  
+  try {
+    const { data, error } = await resend.emails.send({
+      from: 'CivilEn Publishing <newsletter@civilenpublishing.com>',
+      to,
+      subject,
+      html,
+      text,
+    })
+    
+    if (error) {
+      throw error
+    }
+    
+    return { success: true, data }
+  } catch (error) {
+    console.error('Email sending failed:', error)
+    return { success: false, error }
+  }
 
   // ===== OPTION 2: Using SendGrid =====
   // import sgMail from '@sendgrid/mail'
