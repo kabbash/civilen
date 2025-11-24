@@ -22,6 +22,15 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Check if Resend API key is configured
+    if (!process.env.RESEND_API_KEY) {
+      console.error('[Contact Form] RESEND_API_KEY not configured')
+      throw new Error('Email service not configured')
+    }
+
+    console.log(`[Contact Form] Processing message from ${name} (${email})`)
+    console.log(`[Contact Form] Subject: ${subject}`)
+
     // Send email
     const result = await sendContactEmail({
       name,
@@ -30,11 +39,14 @@ export async function POST(request: NextRequest) {
       message,
     })
 
+    console.log(`[Contact Form] Email send result:`, result)
+
     if (!result.success) {
+      console.error('[Contact Form] Failed to send email:', result.error)
       throw new Error('Failed to send email')
     }
 
-    console.log(`[Contact Form] Message sent from ${name} (${email})`)
+    console.log(`[Contact Form] ✅ Message sent successfully from ${name} (${email})`)
 
     return NextResponse.json(
       { 
