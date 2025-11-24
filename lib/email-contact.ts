@@ -84,7 +84,7 @@ export async function sendContactEmail({
   try {
     const { data, error } = await resend.emails.send({
       from: fromEmail,
-      to: toEmail,
+      to: [toEmail], // Resend requires an array
       replyTo: email,
       subject: `Contact Form: ${subject}`,
       html,
