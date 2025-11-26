@@ -7,21 +7,65 @@ export async function POST(request: NextRequest) {
   try {
     // Verify the request is from Sanity
     const secret = request.headers.get("x-sanity-webhook-secret");
-    
-    if (!process.env.SANITY_WEBHOOK_SECRET) {
+    const envSecret = process.env.SANITY_WEBHOOK_SECRET;
+
+    console.log("[Webhook Revalidate] Received request");
+    console.log("[Webhook Revalidate] Has secret header:", !!secret);
+    console.log("[Webhook Revalidate] Secret header length:", secret?.length || 0);
+    console.log("[Webhook Revalidate] Env var configured:", !!envSecret);
+    console.log("[Webhook Revalidate] Env var length:", envSecret?.length || 0);
+
+    if (!envSecret) {
+      console.error(
+        "[Webhook Revalidate] SANITY_WEBHOOK_SECRET environment variable not configured"
+      );
       return NextResponse.json(
-        { message: "Webhook secret not configured" },
+        {
+          message: "Webhook secret not configured",
+          debug: "SANITY_WEBHOOK_SECRET environment variable is not set",
+        },
         { status: 500 }
       );
     }
 
-    if (secret !== process.env.SANITY_WEBHOOK_SECRET) {
-      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+    if (!secret) {
+      console.error("[Webhook Revalidate] No secret header provided");
+      return NextResponse.json(
+        {
+          message: "Unauthorized",
+          debug: "Missing x-sanity-webhook-secret header",
+        },
+        { status: 401 }
+      );
+    }
+
+    // Trim whitespace from both values to handle copy/paste issues
+    const trimmedSecret = secret.trim();
+    const trimmedEnvSecret = envSecret.trim();
+
+    if (trimmedSecret !== trimmedEnvSecret) {
+      console.error("[Webhook Revalidate] Secret mismatch");
+      console.error("[Webhook Revalidate] Header length:", trimmedSecret.length);
+      console.error("[Webhook Revalidate] Env length:", trimmedEnvSecret.length);
+      console.error("[Webhook Revalidate] Header preview:", trimmedSecret.substring(0, 10) + "...");
+      console.error("[Webhook Revalidate] Env preview:", trimmedEnvSecret.substring(0, 10) + "...");
+      return NextResponse.json(
+        {
+          message: "Unauthorized",
+          debug: {
+            reason: "Secret mismatch",
+            headerLength: trimmedSecret.length,
+            envLength: trimmedEnvSecret.length,
+            tip: "Check for whitespace or typos in Sanity webhook header or Vercel env var",
+          },
+        },
+        { status: 401 }
+      );
     }
 
     // Parse the webhook body
     const body = await request.json();
-    
+
     // Sanity webhook body structure: { _type, slug, _id, ... }
     const { _type, slug, _id } = body;
 
@@ -34,13 +78,13 @@ export async function POST(request: NextRequest) {
       case "article":
         revalidatePath("/articles");
         revalidatedPaths.push("/articles");
-        
+
         if (slug?.current || slug) {
           const slugString = slug?.current || slug;
           revalidatePath(`/articles/${slugString}`);
           revalidatedPaths.push(`/articles/${slugString}`);
         }
-        
+
         revalidatePath("/");
         revalidatedPaths.push("/");
         break;
@@ -48,13 +92,13 @@ export async function POST(request: NextRequest) {
       case "book":
         revalidatePath("/books");
         revalidatedPaths.push("/books");
-        
+
         if (slug?.current || slug) {
           const slugString = slug?.current || slug;
           revalidatePath(`/books/${slugString}`);
           revalidatedPaths.push(`/books/${slugString}`);
         }
-        
+
         revalidatePath("/");
         revalidatedPaths.push("/");
         break;
@@ -85,10 +129,10 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error("[Webhook Revalidate] Error:", error);
     return NextResponse.json(
-      { 
+      {
         success: false,
-        message: "Failed to process webhook", 
-        error: error instanceof Error ? error.message : "Unknown error" 
+        message: "Failed to process webhook",
+        error: error instanceof Error ? error.message : "Unknown error",
       },
       { status: 500 }
     );
@@ -104,4 +148,3 @@ export async function GET() {
     configured: !!process.env.SANITY_WEBHOOK_SECRET,
   });
 }
-
