@@ -11,11 +11,13 @@ Changed the breakpoint from `md:` (768px) to `lg:` (1024px) so tablets use the v
 ## What Changed
 
 ### Before:
+
 - **Mobile** (< 768px): Vertical layout ✅
 - **Tablet** (768px-1023px): Horizontal layout ❌ (BROKEN - too cramped)
 - **Desktop** (≥ 1024px): Horizontal layout ✅
 
 ### After:
+
 - **Mobile** (< 768px): Vertical layout ✅
 - **Tablet** (768px-1023px): Vertical layout ✅ (FIXED!)
 - **Desktop** (≥ 1024px): Horizontal layout ✅
@@ -41,12 +43,15 @@ All responsive classes changed from `md:` to `lg:`:
 ## Why This Matters
 
 ### iPad & Tablet Devices
+
 - **iPad** (768px): Now uses vertical layout instead of cramped horizontal
 - **iPad Air** (820px): Vertical layout, better readability
 - **iPad Pro** (1024px): Horizontal layout works perfectly
 
 ### Minimum Width Requirements
+
 The 4-column horizontal layout needs:
+
 - Newsletter box: 420px
 - Links section: ~100px
 - Support section: ~150px
@@ -63,6 +68,7 @@ npm run dev
 ```
 
 ### Test These Widths:
+
 1. **375px** (iPhone SE) - Vertical ✅
 2. **390px** (iPhone 12/13) - Vertical ✅
 3. **768px** (iPad) - Vertical ✅ **[FIXED!]**
@@ -71,6 +77,7 @@ npm run dev
 6. **1440px** (Desktop) - Horizontal ✅
 
 ### DevTools Test
+
 1. Open DevTools (F12)
 2. Toggle device toolbar (Ctrl/Cmd + Shift + M)
 3. Select "iPad" preset
@@ -106,5 +113,3 @@ xl:  1280px  - Large desktops
 ✅ **Footer now looks great on tablets!**
 
 Test it on an iPad or tablet device to see the improvement.
-
-

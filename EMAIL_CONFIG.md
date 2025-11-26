@@ -24,6 +24,7 @@ NEXT_PUBLIC_SITE_URL=https://civilenpublishing.com
 ## Email Variables Explained
 
 ### NEWSLETTER_FROM_EMAIL
+
 - **What it is**: The sender address for newsletter emails
 - **Used for**: Sending notifications when new articles/books are published
 - **Format**: `Name <email@domain.com>`
@@ -31,6 +32,7 @@ NEXT_PUBLIC_SITE_URL=https://civilenpublishing.com
 - **Example**: `CivilEn Publishing <newsletter@civilenpublishing.com>`
 
 ### CONTACT_FROM_EMAIL
+
 - **What it is**: The sender address for contact form notifications
 - **Used for**: Sending contact form submissions to your inbox
 - **Format**: `Name <email@domain.com>`
@@ -38,6 +40,7 @@ NEXT_PUBLIC_SITE_URL=https://civilenpublishing.com
 - **Example**: `CivilEn Contact <contact@civilenpublishing.com>`
 
 ### CONTACT_TO_EMAIL
+
 - **What it is**: Where contact form submissions are sent
 - **Used for**: Receiving messages from website visitors
 - **Format**: `email@domain.com`
@@ -99,6 +102,7 @@ NEXT_PUBLIC_SITE_URL=https://civilenpublishing.com
 ## Email Flow Diagram
 
 ### Newsletter Flow
+
 ```
 User subscribes → Sanity CMS stores email
 ↓
@@ -112,6 +116,7 @@ Subscribers receive beautiful HTML newsletter
 ```
 
 ### Contact Form Flow
+
 ```
 User fills contact form → Frontend validates
 ↓
@@ -137,7 +142,7 @@ CONTACT_TO_EMAIL=support@civilenpublishing.com,admin@civilenpublishing.com,sales
 Then update `/app/api/contact/route.ts`:
 
 ```typescript
-const toEmails = process.env.CONTACT_TO_EMAIL?.split(',') || ['info@civilenpublishing.com']
+const toEmails = process.env.CONTACT_TO_EMAIL?.split(",") || ["info@civilenpublishing.com"];
 ```
 
 ### Different Emails for Different Content Types
@@ -145,6 +150,7 @@ const toEmails = process.env.CONTACT_TO_EMAIL?.split(',') || ['info@civilenpubli
 If you want different sender addresses for articles vs books:
 
 1. Add to `.env.local`:
+
 ```env
 NEWSLETTER_ARTICLE_FROM=CivilEn Articles <articles@civilenpublishing.com>
 NEWSLETTER_BOOK_FROM=CivilEn Books <books@civilenpublishing.com>
@@ -209,6 +215,7 @@ The contact form automatically sets Reply-To to the user's email, so you can rep
 ## Email Templates
 
 ### Newsletter Email Includes:
+
 - Branded header with CivilEn logo
 - Content title and description
 - Call-to-action button
@@ -217,6 +224,7 @@ The contact form automatically sets Reply-To to the user's email, so you can rep
 - Responsive HTML design
 
 ### Contact Form Email Includes:
+
 - Clear subject line with "Contact Form:"
 - Sender's name and email
 - Subject from form
@@ -241,4 +249,3 @@ The contact form automatically sets Reply-To to the user's email, so you can rep
 - **Verify Domain**: https://resend.com/domains
 
 For questions: info@civilenpublishing.com
-

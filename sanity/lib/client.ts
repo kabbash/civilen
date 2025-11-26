@@ -1,14 +1,14 @@
-import { createClient } from 'next-sanity'
+import { createClient } from "next-sanity";
 
-import { apiVersion, dataset, projectId } from '../env'
+import { apiVersion, dataset, projectId } from "../env";
 
 export const client = createClient({
   projectId,
   dataset,
   apiVersion,
   useCdn: true, // Set to false if statically generating pages, using ISR or tag-based revalidation
-  perspective: 'published',
-})
+  perspective: "published",
+});
 
 // Client with write permissions for API routes
 export const writeClient = createClient({
@@ -17,5 +17,4 @@ export const writeClient = createClient({
   apiVersion,
   useCdn: false,
   token: process.env.SANITY_API_TOKEN,
-})
-
+});

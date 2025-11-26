@@ -3,6 +3,7 @@
 ## ✅ Completed Features
 
 ### 1. **Sanity Schema** - Newsletter Subscribers
+
 - **File**: `sanity/schemas/subscriber.ts`
 - Stores subscriber email, subscription date, active status, and source
 - Integrated with Sanity Studio for easy management
@@ -10,6 +11,7 @@
 - Supports reactivation of inactive subscribers
 
 ### 2. **Subscription API Endpoint**
+
 - **Endpoint**: `POST /api/subscribe`
 - **File**: `app/api/subscribe/route.ts`
 - Validates email addresses
@@ -18,6 +20,7 @@
 - Returns appropriate success/error messages
 
 ### 3. **Webhook API for Content Notifications**
+
 - **Endpoint**: `POST /api/webhook/notify-subscribers`
 - **File**: `app/api/webhook/notify-subscribers/route.ts`
 - Receives notifications from Sanity when articles/books are published
@@ -27,6 +30,7 @@
 - Includes webhook secret verification for security
 
 ### 4. **Email Notification System**
+
 - **File**: `lib/email.ts`
 - Beautiful HTML email templates for articles and books
 - Plain text fallback for email clients
@@ -34,6 +38,7 @@
 - Includes unsubscribe links and company branding
 
 ### 5. **Newsletter Form in Footer**
+
 - **File**: `components/layout/Footer.tsx`
 - Already existing form now connected to subscription API
 - Shows loading state during submission
@@ -41,6 +46,7 @@
 - Validates email on client and server side
 
 ### 6. **Documentation & Testing**
+
 - **Setup Guide**: `NEWSLETTER_SETUP.md`
 - **Test Script**: `scripts/test-newsletter.ts`
 - **Git Ignore**: Added `/notifications` to `.gitignore`
@@ -48,6 +54,7 @@
 ## 📁 Files Created/Modified
 
 ### New Files:
+
 1. `sanity/schemas/subscriber.ts` - Subscriber schema
 2. `app/api/subscribe/route.ts` - Subscription endpoint
 3. `app/api/webhook/notify-subscribers/route.ts` - Webhook endpoint
@@ -57,6 +64,7 @@
 7. `NEWSLETTER_IMPLEMENTATION.md` - This file
 
 ### Modified Files:
+
 1. `sanity/schemas/index.ts` - Added subscriber schema
 2. `components/layout/Footer.tsx` - Connected form to API
 3. `.gitignore` - Added notifications folder
@@ -64,6 +72,7 @@
 ## 🚀 How It Works
 
 ### User Subscription Flow:
+
 ```
 1. User enters email in footer form
 2. Frontend sends POST to /api/subscribe
@@ -73,6 +82,7 @@
 ```
 
 ### Content Publication Flow:
+
 ```
 1. Admin publishes article/book in Sanity Studio
 2. Sanity webhook triggers POST to /api/webhook/notify-subscribers
@@ -85,6 +95,7 @@
 ## 📧 Email Templates
 
 ### Article Email Features:
+
 - CivilEn branded header
 - Article title and description
 - "Read Article" call-to-action button
@@ -92,6 +103,7 @@
 - Unsubscribe link
 
 ### Book Email Features:
+
 - CivilEn branded header
 - Book title and description
 - "View Book Details" call-to-action button
@@ -114,6 +126,7 @@ Each time content is published, a JSON file is created:
 **Location**: `/notifications/notification-{timestamp}.json`
 
 **Contents**:
+
 ```json
 {
   "timestamp": "2024-11-24T12:00:00.000Z",
@@ -127,6 +140,7 @@ Each time content is published, a JSON file is created:
 ```
 
 **Use Cases**:
+
 - Audit trail of all notifications sent
 - Debugging and troubleshooting
 - Manual email sending if needed
@@ -136,7 +150,9 @@ Each time content is published, a JSON file is created:
 ## ⚙️ Configuration Required
 
 ### 1. Environment Variables
+
 Add to `.env.local`:
+
 ```env
 # Webhook security (required for production)
 SANITY_WEBHOOK_SECRET=your_random_secret
@@ -150,6 +166,7 @@ NEXT_PUBLIC_SITE_URL=https://your-domain.com
 ```
 
 ### 2. Sanity Webhook Setup
+
 1. Go to: https://www.sanity.io/manage
 2. Navigate to: API → Webhooks
 3. Create webhook with:
@@ -159,13 +176,16 @@ NEXT_PUBLIC_SITE_URL=https://your-domain.com
    - Secret: (same as SANITY_WEBHOOK_SECRET)
 
 ### 3. Email Service Setup
+
 Choose one:
+
 - **Resend**: `npm install resend` + uncomment in `/lib/email.ts`
 - **SendGrid**: `npm install @sendgrid/mail` + uncomment in `/lib/email.ts`
 
 ## 🧪 Testing
 
 ### Test Subscription:
+
 ```bash
 curl -X POST http://localhost:3000/api/subscribe \
   -H "Content-Type: application/json" \
@@ -173,6 +193,7 @@ curl -X POST http://localhost:3000/api/subscribe \
 ```
 
 ### Test Webhook:
+
 ```bash
 curl -X POST http://localhost:3000/api/webhook/notify-subscribers \
   -H "Content-Type: application/json" \
@@ -181,6 +202,7 @@ curl -X POST http://localhost:3000/api/webhook/notify-subscribers \
 ```
 
 ### Or use the test script:
+
 ```bash
 npx ts-node scripts/test-newsletter.ts
 ```
@@ -203,6 +225,7 @@ npx ts-node scripts/test-newsletter.ts
 **Fully Functional!** ✅
 
 The system is complete and ready to use. To activate:
+
 1. Restart dev server (schema changes)
 2. Add environment variables
 3. Set up Sanity webhook
@@ -213,4 +236,3 @@ The system is complete and ready to use. To activate:
 ## 📞 Support
 
 For questions or issues, contact: info@civilenpublishing.com
-

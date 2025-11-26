@@ -7,6 +7,7 @@ All Figma components have been implemented and **all assets are now local** (no 
 ## 📦 Available Components
 
 ### Layout Components
+
 ```tsx
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -16,12 +17,13 @@ import { Footer } from "@/components/layout/Footer";
 ```
 
 ### UI Components
+
 ```tsx
-import { 
-  PrimaryButton, 
-  NavLink, 
-  PageHeader, 
-  FeatureCard 
+import {
+  PrimaryButton,
+  NavLink,
+  PageHeader,
+  FeatureCard
 } from "@/components/ui";
 
 <PrimaryButton onClick={handleClick}>Click Me</PrimaryButton>
@@ -31,6 +33,7 @@ import {
 ```
 
 ### Content Components
+
 ```tsx
 import { BookCard } from "@/components/books/BookCard";
 import { ArticleCard } from "@/components/articles/ArticleCard";
@@ -42,6 +45,7 @@ import { ArticleCard } from "@/components/articles/ArticleCard";
 ## 🎨 Assets Location
 
 All images are in `/public/images/`:
+
 ```
 images/
 ├── logo/           → CivilEn logos
@@ -79,6 +83,7 @@ npm run dev
 ## 💡 Common Tasks
 
 ### Adding a New Page
+
 ```tsx
 // app/new-page/page.tsx
 import { PageHeader } from "@/components/ui";
@@ -94,41 +99,42 @@ export default function NewPage() {
 ```
 
 ### Using Custom Images
+
 ```tsx
 // Put image in /public/images/
-<ArticleCard 
-  article={article}
-  imageUrl="/images/my-custom-image.jpg"
-/>
+<ArticleCard article={article} imageUrl="/images/my-custom-image.jpg" />
 ```
 
 ### Customizing Styles
+
 ```tsx
 // All components accept className
-<PrimaryButton className="w-full text-xl">
-  Custom Styled Button
-</PrimaryButton>
+<PrimaryButton className="w-full text-xl">Custom Styled Button</PrimaryButton>
 ```
 
 ## 🆘 Troubleshooting
 
 ### Images not showing?
+
 - Check path: `/images/category/filename.ext` (no `/public/`)
 - Verify file exists in `/public/images/`
 - Clear Next.js cache: `rm -rf .next && npm run dev`
 
 ### Styling issues?
+
 - Ensure Tailwind is working: Check `app/globals.css`
 - Check for conflicting CSS classes
 - Use browser DevTools to inspect elements
 
 ### TypeScript errors?
+
 - Run `npm run type-check` (if available)
 - Check `types/index.ts` for type definitions
 
 ## 🤝 Need Help?
 
 Ask me anything:
+
 - "How do I make BookCard responsive?"
 - "Create a new component from this Figma URL: ..."
 - "Why isn't my image showing?"
@@ -139,5 +145,3 @@ Ask me anything:
 **Ready to build! 🎉**
 
 Start your dev server and see your Figma designs come to life!
-
-

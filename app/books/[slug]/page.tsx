@@ -50,73 +50,72 @@ export default async function BookDetailPage({ params }: BookDetailPageProps) {
   }
 
   // Handle both string URLs and Sanity image objects
-  const coverImageUrl = typeof book.coverImage === 'string' 
-    ? book.coverImage 
-    : urlForImage(book.coverImage)?.url() || '/images/articles/default-article.jpg';
+  const coverImageUrl =
+    typeof book.coverImage === "string"
+      ? book.coverImage
+      : urlForImage(book.coverImage)?.url() || "/images/articles/default-article.jpg";
 
   return (
-    <main className="relative w-full min-h-screen bg-white pb-[400px]">
-      {/* Decorative Lines */}
-      <div className="absolute left-0 top-[750px] w-full h-px bg-[#ea5422]" />
-      <div className="absolute left-1/3 top-[44px] h-[706px] w-px bg-[#ea5422]" />
-
-      {/* Content Container */}
-      <div className="relative max-w-[1440px] mx-auto px-20">
-        {/* Book Cover - Left Side */}
-        <div className="absolute left-20 top-[120px] w-[416px] h-[600px] rounded-tl-[8px] rounded-bl-[8px] shadow-[0px_3px_10px_0px_rgba(190,64,22,0.25)]">
-          <Image
-            src={coverImageUrl}
-            alt={book.title}
-            fill
-            className="object-cover rounded-tl-[8px] rounded-bl-[8px]"
-            priority
-          />
-        </div>
-
-        {/* Book Details - Right Side */}
-        <div className="ml-[calc(33.33%+85px)] pt-[160px] max-w-[740px]">
-          {/* Title and Description */}
-          <div className="flex flex-col gap-2.5 mb-6">
-            <h1 className="font-gotham-medium text-4xl leading-[54px] text-[#ea5422]">
-              {book.title}
-            </h1>
-          </div>
-
-
-          {/* Long Description */}
-          {book.fullDescription && (
-              <PortableText 
-                value={book.fullDescription} 
-                components={portableTextComponents}
+    <main className="relative min-h-screen w-full bg-white">
+      <div className="mx-auto max-w-[1440px]">
+        {/* Main Grid Layout with Orange Borders */}
+        <div className="grid grid-cols-[545px_1fr] gap-0">
+          {/* Left Column - Book Cover */}
+          <div className="mt-10 border-r border-[#ea5422] pr-[49px] pb-[160px] pl-20">
+            <div className="relative h-[600px] w-[416px] overflow-hidden rounded-tl-[8px] rounded-bl-[8px] shadow-[0px_3px_10px_0px_rgba(190,64,22,0.25)]">
+              <Image
+                src={coverImageUrl}
+                alt={book.title}
+                fill
+                className="rounded-tl-[8px] rounded-bl-[8px] object-cover"
+                priority
               />
-          )}
-
-        </div>
-
-        {/* Bottom Section - Button and Errata Link */}
-        <div className="absolute left-20 top-[780px] w-[calc(100%-160px)]">
-          {/* Buy Button */}
-          <div className="flex flex-col gap-2 w-[417px]">
-            <Link href={book.amazonLink} target="_blank" rel="noopener noreferrer">
-              <PrimaryButton className="w-full">
-                Buy Now on Amazon.com
-              </PrimaryButton>
-            </Link>
-            <p className="font-gotham-book text-xs leading-[18px] text-[#2e2d2d] text-right">
-              Secure purchase and fulfillment handled by Amazon.
-            </p>
+            </div>
           </div>
 
-          {/* Errata Link */}
-          <Link
-            href="/errata"
-            className="absolute right-0 top-5 font-gotham-medium text-lg leading-[27px] text-[#ea5422] underline hover:no-underline transition-all"
-          >
-            Found an error? Check the Errata Page →
-          </Link>
+          {/* Right Column - Book Details */}
+          <div className="mt-20 pr-20 pb-[160px] pl-[75px]">
+            {/* Title and Description */}
+            <div className="mb-6 flex flex-col gap-2.5">
+              <h1 className="font-gotham-medium text-4xl leading-[54px] text-[#ea5422]">
+                {book.title}
+              </h1>
+            </div>
+
+            {/* Long Description */}
+            {book.fullDescription && (
+              <div className="max-w-[740px]">
+                <PortableText value={book.fullDescription} components={portableTextComponents} />
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Bottom Section with Top Border */}
+        <div className="grid grid-cols-[545px_1fr] gap-0 border-t border-[#ea5422]">
+          {/* Left Column - Buy Button */}
+          <div className="border-r border-[#ea5422] pt-[30px] pr-[49px] pb-[70px] pl-20">
+            <div className="flex w-[417px] flex-col gap-2">
+              <Link href={book.amazonLink} target="_blank" rel="noopener noreferrer">
+                <PrimaryButton className="w-full">Buy Now on Amazon.com</PrimaryButton>
+              </Link>
+              <p className="font-gotham-book text-right text-xs leading-[18px] text-[#2e2d2d]">
+                Secure purchase and fulfillment handled by Amazon.
+              </p>
+            </div>
+          </div>
+
+          {/* Right Column - Errata Link */}
+          <div className="flex justify-end pt-[51px] pr-20 pb-[70px] pl-[75px]">
+            <Link
+              href="/errata"
+              className="font-gotham-medium text-lg leading-[27px] text-[#ea5422] underline transition-all hover:no-underline"
+            >
+              Found an error? Check the Errata Page →
+            </Link>
+          </div>
         </div>
       </div>
     </main>
   );
 }
-

@@ -3,6 +3,7 @@
 ## The Problem
 
 You're getting a 401 (Authentication Required) error because:
+
 - Your Sanity webhook is trying to reach a Vercel deployment
 - Vercel has **Deployment Protection** enabled (default for preview deployments)
 - Sanity's webhook can't bypass this protection
@@ -17,9 +18,11 @@ The simplest solution is to configure the webhook to use your **production** URL
 2. Navigate to: **API** → **Webhooks**
 3. Edit your webhook
 4. Change the URL to your **production domain**:
+
    ```
    https://your-production-domain.com/api/webhook/notify-subscribers
    ```
+
    (Not the preview URL like `your-app-git-branch.vercel.app`)
 
 5. Save the webhook
@@ -74,6 +77,7 @@ ngrok http 3000
 ```
 
 You'll see output like:
+
 ```
 Forwarding    https://abc123.ngrok.io -> http://localhost:3000
 ```
@@ -98,6 +102,7 @@ Now when you publish an article or book in Sanity, the webhook will reach your l
 For production, ensure your webhook has proper security:
 
 1. **Generate a secure secret**:
+
    ```bash
    # Generate a random secret
    openssl rand -hex 32
@@ -147,6 +152,7 @@ curl -X POST http://localhost:3000/api/webhook/notify-subscribers \
 ### Check Vercel Logs
 
 If using Vercel:
+
 1. Go to Vercel Dashboard → Your Project
 2. Click on **Functions** tab
 3. Look for logs from `/api/webhook/notify-subscribers`
@@ -159,10 +165,12 @@ If using Vercel:
 For your current setup, I recommend:
 
 ### During Development:
+
 1. ✅ Use **ngrok** to test webhooks locally
 2. ✅ This lets you develop and test without deploying
 
 ### For Production:
+
 1. ✅ Use your **production domain** in the webhook URL
 2. ✅ Add `SANITY_WEBHOOK_SECRET` to Vercel environment variables
 3. ✅ Test by publishing content and checking:
@@ -246,4 +254,3 @@ If you get a 401 error, follow Solution 1 or 3 above.
 4. Test each component separately (subscription, webhook, email)
 
 For questions: info@civilenpublishing.com
-

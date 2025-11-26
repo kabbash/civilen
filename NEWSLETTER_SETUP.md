@@ -44,7 +44,7 @@ To automatically notify subscribers when you publish new articles or books in Sa
    - **URL**: `https://your-domain.com/api/webhook/notify-subscribers`
    - **Dataset**: production (or your dataset name)
    - **Trigger on**: `Create` and `Update`
-   - **Filter**: 
+   - **Filter**:
      ```groq
      _type == "article" || _type == "book"
      ```
@@ -139,6 +139,7 @@ curl -X POST http://localhost:3000/api/webhook/notify-subscribers \
 Subscribe a user to the newsletter.
 
 **Request:**
+
 ```json
 {
   "email": "user@example.com",
@@ -147,6 +148,7 @@ Subscribe a user to the newsletter.
 ```
 
 **Response (Success):**
+
 ```json
 {
   "message": "Successfully subscribed to newsletter!",
@@ -155,6 +157,7 @@ Subscribe a user to the newsletter.
 ```
 
 **Response (Already Subscribed):**
+
 ```json
 {
   "message": "This email is already subscribed!"
@@ -166,9 +169,11 @@ Subscribe a user to the newsletter.
 Webhook endpoint for Sanity to trigger notifications.
 
 **Headers:**
+
 - `x-sanity-webhook-secret`: Your webhook secret
 
 **Request:**
+
 ```json
 {
   "_type": "article",
@@ -179,6 +184,7 @@ Webhook endpoint for Sanity to trigger notifications.
 ```
 
 **Response:**
+
 ```json
 {
   "message": "Notification processed successfully",
@@ -193,6 +199,7 @@ Webhook endpoint for Sanity to trigger notifications.
 Check if the webhook is active.
 
 **Response:**
+
 ```json
 {
   "message": "Newsletter notification webhook is active",
@@ -249,6 +256,7 @@ When content is published, a JSON file is saved in the `notifications` folder:
 ```
 
 These files are useful for:
+
 - Auditing notification history
 - Debugging issues
 - Tracking subscriber growth
@@ -276,18 +284,21 @@ These files are useful for:
 ## Troubleshooting
 
 ### Webhook not triggering
+
 - Verify the webhook URL is correct
 - Check webhook secret matches `.env.local`
 - Ensure your site is deployed and accessible
 - Check Sanity webhook logs in dashboard
 
 ### Emails not sending
+
 - Check email service API key
 - Verify email service is configured in `/lib/email.ts`
 - Check console logs for errors
 - Ensure sender email is verified with your email service
 
 ### Subscribers not appearing in Sanity
+
 - Restart development server
 - Clear browser cache
 - Check API endpoint response in browser console
@@ -296,4 +307,3 @@ These files are useful for:
 ## Support
 
 For issues or questions, contact: info@civilenpublishing.com
-

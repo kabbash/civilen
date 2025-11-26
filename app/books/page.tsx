@@ -6,7 +6,8 @@ import { Book } from "@/types";
 
 export const metadata: Metadata = {
   title: "Books | CivilEn Publishing",
-  description: "Browse our collection of PE Structural Engineering practice exams and study materials",
+  description:
+    "Browse our collection of PE Structural Engineering practice exams and study materials",
 };
 
 // Revalidate every hour
@@ -16,17 +17,17 @@ export default async function BooksPage() {
   const books = await getAllBooks();
 
   return (
-    <main className="relative w-full min-h-screen bg-white pb-[400px]">
+    <main className="relative min-h-screen w-full bg-white pb-[400px]">
       {/* Hero Section with Background Image */}
       <section className="relative h-[360px] w-full overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0">
-          <div className="relative w-full h-full bg-[#3d2218]">
+          <div className="relative h-full w-full bg-[#3d2218]">
             <Image
               src="/images/hero/engineer-construction.png"
               alt="Construction Background"
               fill
-              className="object-cover mix-blend-overlay opacity-40"
+              className="object-cover opacity-40 mix-blend-overlay"
               priority
             />
           </div>
@@ -35,22 +36,21 @@ export default async function BooksPage() {
         </div>
 
         {/* Hero Title */}
-        <div className="absolute left-1/2 top-[140px] -translate-x-1/2 backdrop-blur-[10px] bg-[rgba(234,84,34,0.5)] px-10 py-2.5">
-          <h1 className="font-gotham-bold text-5xl leading-[72px] text-white whitespace-nowrap">
+        <div className="absolute top-[140px] left-1/2 -translate-x-1/2 bg-[rgba(234,84,34,0.5)] px-10 py-2.5 backdrop-blur-[10px]">
+          <h1 className="font-gotham-bold text-5xl leading-[72px] whitespace-nowrap text-white">
             CBT Practice Exams
           </h1>
         </div>
       </section>
 
       {/* Books Grid Section - Overlaps hero section */}
-      <section className="relative max-w-[1440px] mx-auto px-20 -mt-[68px]">
-        <div className="flex gap-4 justify-start">
+      <section className="relative mx-auto -mt-[68px] max-w-[1440px] px-20">
+        <div className="flex flex-wrap justify-start gap-4">
           {books.map((book: Book) => (
-            <BookCard key={book._id} book={book} showLongDescription={true}/>
+            <BookCard key={book._id} book={book} showLongDescription={true} />
           ))}
         </div>
       </section>
     </main>
   );
 }
-

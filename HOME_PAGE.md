@@ -24,6 +24,7 @@ app/page.tsx (Main Home Page)
 The main hero section with headline, description, and CTA.
 
 **Features:**
+
 - Large, bold headline (96px desktop)
 - Description text
 - Primary CTA button
@@ -31,10 +32,11 @@ The main hero section with headline, description, and CTA.
 - Responsive text sizing
 
 **Usage:**
+
 ```tsx
 import { HeroSection } from "@/components/home";
 
-<HeroSection />
+<HeroSection />;
 ```
 
 **Props:** None - all content is hardcoded
@@ -44,19 +46,22 @@ import { HeroSection } from "@/components/home";
 Reusable section header component with orange gradient underline.
 
 **Features:**
+
 - Orange text (36px)
 - Gradient background bar
 - Centered alignment
 - Responsive sizing
 
 **Usage:**
+
 ```tsx
 import { SectionHeader } from "@/components/home";
 
-<SectionHeader>Your Custom Title</SectionHeader>
+<SectionHeader>Your Custom Title</SectionHeader>;
 ```
 
 **Props:**
+
 ```tsx
 interface SectionHeaderProps {
   children: React.ReactNode;
@@ -69,12 +74,14 @@ interface SectionHeaderProps {
 Displays featured books using the existing BookCard component.
 
 **Features:**
+
 - Section header
 - Grid layout for books
 - Uses BookCard component
 - Configurable book list and limit
 
 **Usage:**
+
 ```tsx
 import { BooksSection } from "@/components/home";
 
@@ -86,10 +93,11 @@ import { BooksSection } from "@/components/home";
 ```
 
 **Props:**
+
 ```tsx
 interface BooksSectionProps {
-  books?: Book[];  // Optional custom book list
-  limit?: number;  // Number of books to display (default: 2)
+  books?: Book[]; // Optional custom book list
+  limit?: number; // Number of books to display (default: 2)
 }
 ```
 
@@ -98,6 +106,7 @@ interface BooksSectionProps {
 Displays online question banks with details.
 
 **Features:**
+
 - Section header
 - Grid layout (3 columns on desktop)
 - Question count display
@@ -105,15 +114,17 @@ Displays online question banks with details.
 - Hover effects
 
 **Usage:**
+
 ```tsx
 import { OnlineBanksSection } from "@/components/home";
 
-<OnlineBanksSection />
+<OnlineBanksSection />;
 ```
 
 **Props:** None - banks data is hardcoded (can be made dynamic)
 
 **Sample Data Structure:**
+
 ```tsx
 const banks = [
   {
@@ -131,21 +142,24 @@ const banks = [
 Displays key statistics/features using FeatureCard.
 
 **Features:**
+
 - 3-column grid on desktop
 - Uses existing FeatureCard component
 - Stats with icons
 - Responsive layout
 
 **Usage:**
+
 ```tsx
 import { FeaturesSection } from "@/components/home";
 
-<FeaturesSection />
+<FeaturesSection />;
 ```
 
 **Props:** None - features data is hardcoded
 
 **Sample Data:**
+
 ```tsx
 const features = [
   { title: "Online Bank Problems", count: "1200+" },
@@ -159,12 +173,14 @@ const features = [
 Displays featured articles using ArticleCard.
 
 **Features:**
+
 - Section header
 - Flexible grid layout
 - Uses existing ArticleCard component
 - Configurable article list and limit
 
 **Usage:**
+
 ```tsx
 import { ArticlesSection } from "@/components/home";
 
@@ -176,10 +192,11 @@ import { ArticlesSection } from "@/components/home";
 ```
 
 **Props:**
+
 ```tsx
 interface ArticlesSectionProps {
-  articles?: Article[];  // Optional custom article list
-  limit?: number;        // Number of articles to display (default: 3)
+  articles?: Article[]; // Optional custom article list
+  limit?: number; // Number of articles to display (default: 3)
 }
 ```
 
@@ -221,25 +238,27 @@ All sections are responsive and follow the same breakpoint strategy as Header/Fo
 
 ```tsx
 // Container padding
-className="px-4 lg:px-20"
+className = "px-4 lg:px-20";
 
 // Grid layouts
-className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3";
 
 // Flex layouts
-className="flex-col lg:flex-row"
+className = "flex-col lg:flex-row";
 
 // Text sizing
-className="text-2xl lg:text-4xl"
-className="text-5xl lg:text-[96px]"
+className = "text-2xl lg:text-4xl";
+className = "text-5xl lg:text-[96px]";
 ```
 
 ## Assets Used
 
 ### New Asset
+
 - `/images/icons/seal-check.svg` - NCEES verification badge
 
 ### Existing Assets
+
 All existing component assets (logos, icons, patterns) are reused.
 
 ## Data Sources
@@ -253,7 +272,7 @@ Currently, sample data is hardcoded in components. To make them dynamic:
 export default async function HomePage() {
   const books = await fetchFeaturedBooks();
   const articles = await fetchFeaturedArticles();
-  
+
   return (
     <main>
       <HeroSection />
@@ -268,15 +287,20 @@ export default async function HomePage() {
 
 ```tsx
 // data/books.ts
-export const books: Book[] = [ /* ... */ ];
+export const books: Book[] = [
+  /* ... */
+];
 
 // data/articles.ts
-export const articles: Article[] = [ /* ... */ ];
+export const articles: Article[] = [
+  /* ... */
+];
 ```
 
 ### 3. Use CMS
 
 Integrate with a CMS like:
+
 - Contentful
 - Sanity
 - Strapi
@@ -291,7 +315,7 @@ Simply reorder components in `app/page.tsx`:
 ```tsx
 <main>
   <HeroSection />
-  <ArticlesSection />      // Moved up
+  <ArticlesSection /> // Moved up
   <BooksSection />
   <OnlineBanksSection />
   <FeaturesSection />
@@ -303,7 +327,9 @@ Simply reorder components in `app/page.tsx`:
 Conditionally render sections:
 
 ```tsx
-{showFeatures && <FeaturesSection />}
+{
+  showFeatures && <FeaturesSection />;
+}
 ```
 
 ### Custom Content
@@ -320,9 +346,7 @@ Pass custom data to configurable sections:
 All components accept `className` prop for custom styling:
 
 ```tsx
-<SectionHeader className="mb-16">
-  Custom Title
-</SectionHeader>
+<SectionHeader className="mb-16">Custom Title</SectionHeader>
 ```
 
 ## Reusable Components Used
@@ -360,6 +384,7 @@ export const metadata: Metadata = {
 ```
 
 ### Improvements You Can Add:
+
 1. Open Graph tags
 2. Twitter card meta
 3. Structured data (JSON-LD)
@@ -397,21 +422,25 @@ export const metadata: Metadata = {
 ## Common Issues & Solutions
 
 ### Books/Articles not showing
+
 - Check that sample data exists
 - Verify import paths
 - Check TypeScript types match
 
 ### Layout breaks on mobile
+
 - Verify responsive classes
 - Check container padding
 - Test on actual devices
 
 ### Images not loading
+
 - Check file paths
 - Verify images exist in `/public`
 - Check Next.js Image config
 
 ### Section spacing looks off
+
 - Adjust `py-12 lg:py-16` values
 - Check margin/padding classes
 - Verify container widths
@@ -419,6 +448,7 @@ export const metadata: Metadata = {
 ## Future Enhancements
 
 ### Possible Additions:
+
 1. **Hero Slider** - Multiple hero slides
 2. **Testimonials** - Customer reviews section
 3. **Newsletter Signup** - Embedded form
@@ -429,6 +459,7 @@ export const metadata: Metadata = {
 8. **Timeline** - Exam prep timeline
 
 ### Dynamic Content:
+
 1. Connect to CMS
 2. Add search functionality
 3. Filter/sort capabilities
@@ -454,5 +485,3 @@ npm run dev
 ```
 
 **Need to customize? Just edit the relevant section component!**
-
-

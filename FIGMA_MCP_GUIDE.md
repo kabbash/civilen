@@ -5,6 +5,7 @@
 I've successfully extracted and implemented all reusable components from your Figma design file:
 
 ### Components Created:
+
 1. ✅ **PrimaryButton** - Orange gradient button with hover/active states
 2. ✅ **NavLink** - Navigation link with active state detection
 3. ✅ **PageHeader** - Section header with decorative gradient
@@ -15,6 +16,7 @@ I've successfully extracted and implemented all reusable components from your Fi
 8. ✅ **ArticleCard** - Article preview card with image overlay
 
 ### Design System:
+
 - ✅ Orange color palette (#ea5422, #ea7922, #be4016)
 - ✅ Gotham font family (Medium, Book, Bold)
 - ✅ Gradient utilities
@@ -23,6 +25,7 @@ I've successfully extracted and implemented all reusable components from your Fi
 ## 📁 Files Created/Modified
 
 ### New Components:
+
 ```
 components/
 ├── ui/
@@ -41,6 +44,7 @@ components/
 ```
 
 ### Configuration:
+
 ```
 app/
 └── globals.css                 ← Updated (design tokens)
@@ -60,6 +64,7 @@ FIGMA_MCP_GUIDE.md             ← This file
 4. Select "Copy link"
 
 The URL will look like:
+
 ```
 https://www.figma.com/design/cqBKc3wzIQFzdcVgeiiIdp/CivilEn?node-id=26-1334
 ```
@@ -71,7 +76,7 @@ Simply paste the Figma URL and tell me what you want:
 **Example Prompts:**
 
 ```
-"Generate a React component from this Figma design: 
+"Generate a React component from this Figma design:
 https://www.figma.com/design/cqBKc3wzIQFzdcVgeiiIdp/CivilEn?node-id=123-456"
 ```
 
@@ -90,27 +95,35 @@ https://www.figma.com/design/cqBKc3wzIQFzdcVgeiiIdp/CivilEn?node-id=26-1334"
 The Figma MCP server provides these capabilities:
 
 #### **Get Design Context** (Most useful)
+
 Extracts component code and styling:
+
 ```
 "Generate code for [Figma URL]"
 "Create a component from [Figma URL]"
 ```
 
 #### **Get Screenshot**
+
 Visual preview of a design:
+
 ```
 "Show me a screenshot of [Figma URL]"
 ```
 
 #### **Get Metadata**
+
 Structure and hierarchy:
+
 ```
 "Show me the structure of [Figma URL]"
 "What layers are in [Figma URL]"
 ```
 
 #### **Get Variables**
+
 Design tokens and variables:
+
 ```
 "Get the color palette from [Figma URL]"
 "Extract design variables from [Figma URL]"
@@ -121,11 +134,13 @@ Design tokens and variables:
 **Step 1:** Find the component in Figma and copy the link
 
 **Step 2:** Ask me to generate it:
+
 ```
 "Create a [component name] based on this Figma design: [URL]"
 ```
 
 **Step 3:** I will:
+
 - Fetch the design from Figma
 - Generate TypeScript/React code
 - Match your project's styling (Tailwind CSS)
@@ -137,26 +152,30 @@ Design tokens and variables:
 ### 5. Common Use Cases
 
 #### Creating a New Component
+
 ```
-"I need a pricing card component from: 
+"I need a pricing card component from:
 https://www.figma.com/design/cqBKc3wzIQFzdcVgeiiIdp/CivilEn?node-id=XXX-YYY"
 ```
 
 #### Updating an Existing Component
+
 ```
-"Update the BookCard component to match this new design: 
+"Update the BookCard component to match this new design:
 https://www.figma.com/design/cqBKc3wzIQFzdcVgeiiIdp/CivilEn?node-id=XXX-YYY"
 ```
 
 #### Extracting Design Tokens
+
 ```
-"Get all the colors and typography from: 
+"Get all the colors and typography from:
 https://www.figma.com/design/cqBKc3wzIQFzdcVgeiiIdp/CivilEn?node-id=26-1334"
 ```
 
 #### Getting Component Variants
+
 ```
-"Show me all the button variants from: 
+"Show me all the button variants from:
 https://www.figma.com/design/cqBKc3wzIQFzdcVgeiiIdp/CivilEn?node-id=9-296"
 ```
 
@@ -198,7 +217,7 @@ import { ArticleCard } from "@/components/articles/ArticleCard";
 <PageHeader>Your PE Exam Practice Starts Here</PageHeader>
 
 // Feature Card
-<FeatureCard 
+<FeatureCard
   title="CBT-Style Practice Questions"
   count="80+"
 />
@@ -212,7 +231,7 @@ import { ArticleCard } from "@/components/articles/ArticleCard";
 }} />
 
 // Article Card
-<ArticleCard 
+<ArticleCard
   article={{
     title: "Beating the PE Exam",
     excerpt: "Lorem ipsum...",
@@ -243,11 +262,7 @@ All components accept a `className` prop for customization:
 Use Tailwind classes to override:
 
 ```tsx
-<FeatureCard 
-  title="Custom Feature"
-  count="100+"
-  className="bg-blue-100"
-/>
+<FeatureCard title="Custom Feature" count="100+" className="bg-blue-100" />
 ```
 
 ### Creating Variants
@@ -259,32 +274,32 @@ Extend the components for specific use cases:
 import { PrimaryButton } from "./primary-button";
 
 export function SecondaryButton(props) {
-  return (
-    <PrimaryButton 
-      {...props} 
-      className="bg-gray-500 hover:bg-gray-600"
-    />
-  );
+  return <PrimaryButton {...props} className="bg-gray-500 hover:bg-gray-600" />;
 }
 ```
 
 ## 📝 Important Notes
 
 ### Image URLs
+
 ⚠️ **The Figma image URLs are temporary (7 days)!**
 
 For production:
+
 1. Download images from the URLs
 2. Save to `/public/images/`
 3. Update component image sources
 
 ### Fonts
+
 The components reference Gotham fonts. Options:
+
 1. Purchase Gotham font license
 2. Use Google Fonts alternative (Montserrat, Inter)
 3. Update font classes in `globals.css`
 
 ### Responsive Design
+
 Current components use fixed widths from Figma. Add responsive classes:
 
 ```tsx
@@ -304,7 +319,9 @@ Current components use fixed widths from Figma. Add responsive classes:
 ## 💡 Pro Tips
 
 ### Batch Component Generation
+
 You can ask me to generate multiple components at once:
+
 ```
 "Generate components for these Figma nodes:
 1. Button - node-id=9-296
@@ -313,13 +330,17 @@ You can ask me to generate multiple components at once:
 ```
 
 ### Component Libraries
+
 Ask me to create a Storybook setup:
+
 ```
 "Create a Storybook configuration for all these Figma components"
 ```
 
 ### Theme Variations
+
 Request different color schemes:
+
 ```
 "Create a dark mode version of these components"
 ```
@@ -346,5 +367,3 @@ Just ask! Example questions:
 **Your Figma MCP is configured and ready to use! 🎉**
 
 Simply paste any Figma URL and tell me what you need.
-
-

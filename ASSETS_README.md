@@ -31,25 +31,30 @@ public/
 ## Usage in Components
 
 ### Header
+
 - `/images/logo/logo.svg` - Main navigation logo
 - `/images/icons/menu-icon.svg` - Mobile menu hamburger icon
 - `/images/icons/close-icon.svg` - Mobile menu close icon
 
 ### Footer
+
 - `/images/patterns/footer-bg.png` - Background texture
 - `/images/icons/email.svg` - Contact email icon
 - `/images/icons/location.svg` - Address location icon
 - `/images/logo/civilen-logo-white.png` - Footer logo
 
 ### BookCard
+
 - `/images/patterns/book-pattern.png` - Card background pattern
 - `/images/bookmarks/bookmark-default.svg` - Default bookmark
 - `/images/bookmarks/bookmark-hover.svg` - Hover state bookmark
 
 ### ArticleCard
+
 - `/images/articles/default-article.jpg` - Default article image
 
 ### FeatureCard
+
 - `/images/icons/feature-icon.svg` - Default feature icon
 
 ## Notes
@@ -65,29 +70,35 @@ public/
 To use custom images in your content:
 
 ### For Articles:
+
 ```tsx
-<ArticleCard 
+<ArticleCard
   article={article}
-  imageUrl="/your-custom-image.jpg"  // Override default
+  imageUrl="/your-custom-image.jpg" // Override default
 />
 ```
 
 ### For Features:
+
 ```tsx
-<FeatureCard 
+<FeatureCard
   title="Your Feature"
   count="100+"
-  iconUrl="/your-custom-icon.svg"  // Override default
+  iconUrl="/your-custom-icon.svg" // Override default
 />
 ```
 
 ### For Books:
+
 The book cover comes from your book data:
+
 ```tsx
-<BookCard book={{
-  coverImage: "/images/books/your-book-cover.jpg",
-  // ... other book data
-}} />
+<BookCard
+  book={{
+    coverImage: "/images/books/your-book-cover.jpg",
+    // ... other book data
+  }}
+/>
 ```
 
 ## Adding New Assets
@@ -99,12 +110,14 @@ The book cover comes from your book data:
 ## Image Optimization
 
 Next.js automatically optimizes all images:
+
 - Automatic format selection (WebP when supported)
 - Responsive image sizes
 - Lazy loading by default
 - Blur placeholder support
 
 Example with blur placeholder:
+
 ```tsx
 <Image
   src="/images/logo/civilen-logo.png"
@@ -115,4 +128,3 @@ Example with blur placeholder:
   blurDataURL="data:image/..." // optional
 />
 ```
-

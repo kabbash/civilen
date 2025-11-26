@@ -3,6 +3,7 @@
 ## 🚀 Get Started in 5 Minutes
 
 ### Step 1: Create Sanity Project
+
 1. Go to [sanity.io](https://www.sanity.io) and sign up
 2. Click "Create new project"
 3. Choose a name (e.g., "CivilEn Publishing")
@@ -10,6 +11,7 @@
 5. Copy your **Project ID**
 
 ### Step 2: Add Environment Variables
+
 Create `.env.local` in the project root:
 
 ```bash
@@ -19,6 +21,7 @@ NEXT_PUBLIC_SANITY_API_VERSION=2024-11-22
 ```
 
 ### Step 3: Deploy Schema
+
 Run this command in your terminal:
 
 ```bash
@@ -26,21 +29,26 @@ npx sanity deploy
 ```
 
 When prompted:
+
 - Select your project
 - Confirm deployment
 
 ### Step 4: Start Development Server
+
 ```bash
 npm run dev
 ```
 
 ### Step 5: Access Sanity Studio
+
 Open your browser and go to:
+
 ```
 http://localhost:3001/studio
 ```
 
 ### Step 6: Add Your First Book
+
 1. In Sanity Studio, click "Book" in the sidebar
 2. Click "Create new Book"
 3. Fill in:
@@ -53,6 +61,7 @@ http://localhost:3001/studio
 4. Click "Publish"
 
 ### Step 7: Add Your First Article
+
 1. Click "Article" in the sidebar
 2. Click "Create new Article"
 3. Fill in:
@@ -64,6 +73,7 @@ http://localhost:3001/studio
 4. Click "Publish"
 
 ### Step 8: View Your Content
+
 1. Go back to your website: `http://localhost:3001`
 2. Wait up to 1 hour for content to appear, OR
 3. Restart the dev server to see changes immediately:
@@ -79,23 +89,27 @@ Your website is now powered by Sanity CMS!
 ## 📝 Common Tasks
 
 ### Add More Books
+
 1. Go to `/studio`
 2. Click "Book" → "Create new Book"
 3. Fill in details and publish
 
 ### Add Articles
+
 1. Go to `/studio`
 2. Click "Article" → "Create new Article"
 3. Write content using the rich text editor
 4. Publish
 
 ### Add Errata
+
 1. Go to `/studio`
 2. Click "Errata" → "Create new Errata"
 3. Link to a book
 4. Fill in details and publish
 
 ### Edit Content
+
 1. Go to `/studio`
 2. Find your content in the list
 3. Click to edit
@@ -112,16 +126,19 @@ Your website is now powered by Sanity CMS!
 ## 🆘 Troubleshooting
 
 ### Content not showing?
+
 - Check if you published (not just saved as draft)
 - Restart dev server
 - Wait up to 1 hour for ISR revalidation
 
 ### Studio not loading?
+
 - Verify `.env.local` has correct project ID
 - Check that you ran `npx sanity deploy`
 - Clear browser cache
 
 ### Images not displaying?
+
 - Verify images are uploaded in Studio
 - Check image file size (keep under 10MB)
 - Try different image format (JPG, PNG)
@@ -140,4 +157,3 @@ Your website is now powered by Sanity CMS!
 - Integration Summary: See `SANITY_INTEGRATION_SUMMARY.md`
 - Sanity Docs: https://www.sanity.io/docs
 - Support: https://www.sanity.io/help
-

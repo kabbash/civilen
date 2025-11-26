@@ -5,11 +5,6 @@ export const metadata: Metadata = {
   description: "Get in touch with us for inquiries and support",
 };
 
-export default function ContactLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function ContactLayout({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
-

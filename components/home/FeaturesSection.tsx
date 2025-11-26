@@ -17,9 +17,9 @@ export function FeaturesSection() {
   ];
 
   return (
-    <section className="container px-4 lg:px-20 py-12 lg:py-16 mx-auto">
+    <section className="container mx-auto px-4 py-12 lg:px-20 lg:py-16">
       {/* Centered with space between cards */}
-      <div className="flex flex-col lg:flex-row items-center justify-center gap-4">
+      <div className="flex flex-col items-center justify-center gap-4 lg:flex-row">
         {features.map((feature, index) => (
           <FeatureCard
             key={index}
@@ -32,4 +32,3 @@ export function FeaturesSection() {
     </section>
   );
 }
-

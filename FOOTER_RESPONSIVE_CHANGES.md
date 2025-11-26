@@ -74,65 +74,59 @@ The Footer component is now **fully responsive** and matches the Figma mobile de
 
 ### 📐 Spacing Changes
 
-| Element | Mobile/Tablet | Desktop |
-|---------|---------------|---------|
-| Container padding | `16px` | `80px` |
-| Section gaps | `32px` | `0px` (justified) |
-| Newsletter padding | `10px` | `16px` |
-| Section heading gaps | `10px` | `16px` |
+| Element              | Mobile/Tablet | Desktop           |
+| -------------------- | ------------- | ----------------- |
+| Container padding    | `16px`        | `80px`            |
+| Section gaps         | `32px`        | `0px` (justified) |
+| Newsletter padding   | `10px`        | `16px`            |
+| Section heading gaps | `10px`        | `16px`            |
 
 ### 📝 Typography Changes
 
-| Element | Mobile/Tablet | Desktop |
-|---------|---------------|---------|
-| Body text | `16px / 24px` | `18px / 27px` |
+| Element          | Mobile/Tablet | Desktop       |
+| ---------------- | ------------- | ------------- |
+| Body text        | `16px / 24px` | `18px / 27px` |
 | Section headings | `16px / 24px` | `18px / 27px` |
 | Newsletter title | `24px / 36px` | `24px / 36px` |
-| Copyright | `14px / 27px` | `14px / 27px` |
+| Copyright        | `14px / 27px` | `14px / 27px` |
 
 ### 🎨 Layout Changes
 
-| Section | Mobile/Tablet | Desktop |
-|---------|---------------|---------|
-| Main container | Vertical stack | Horizontal row |
-| Newsletter width | Full width | 420px fixed |
-| Contact alignment | Left-aligned | Right-aligned |
-| Email text wrap | Break-all | No-wrap |
+| Section           | Mobile/Tablet  | Desktop        |
+| ----------------- | -------------- | -------------- |
+| Main container    | Vertical stack | Horizontal row |
+| Newsletter width  | Full width     | 420px fixed    |
+| Contact alignment | Left-aligned   | Right-aligned  |
+| Email text wrap   | Break-all      | No-wrap        |
 
 ### 🔘 Button Changes
 
-| Element | Mobile/Tablet | Desktop |
-|---------|---------------|---------|
+| Element           | Mobile/Tablet     | Desktop           |
+| ----------------- | ----------------- | ----------------- |
 | Subscribe padding | `10px` horizontal | `24px` horizontal |
-| Subscribe text | `16px` | `18px` |
+| Subscribe text    | `16px`            | `18px`            |
 
 ## Code Changes Summary
 
 ### Before (Desktop only)
+
 ```tsx
 <div className="px-20">
-  <div className="flex items-start justify-between w-full">
-    <div className="w-[420px] p-4">
-      {/* Newsletter */}
-    </div>
-    <div className="flex flex-col gap-4">
-      {/* Links */}
-    </div>
+  <div className="flex w-full items-start justify-between">
+    <div className="w-[420px] p-4">{/* Newsletter */}</div>
+    <div className="flex flex-col gap-4">{/* Links */}</div>
     {/* ... */}
   </div>
 </div>
 ```
 
 ### After (Responsive - Optimized for Tablets)
+
 ```tsx
 <div className="px-4 lg:px-20">
-  <div className="flex flex-col lg:flex-row items-start lg:justify-between w-full gap-8 lg:gap-0">
-    <div className="w-full lg:w-[420px] p-2.5 lg:p-4">
-      {/* Newsletter */}
-    </div>
-    <div className="flex flex-col gap-2.5 lg:gap-4">
-      {/* Links */}
-    </div>
+  <div className="flex w-full flex-col items-start gap-8 lg:flex-row lg:justify-between lg:gap-0">
+    <div className="w-full p-2.5 lg:w-[420px] lg:p-4">{/* Newsletter */}</div>
+    <div className="flex flex-col gap-2.5 lg:gap-4">{/* Links */}</div>
     {/* ... */}
   </div>
 </div>
@@ -185,7 +179,7 @@ npm run dev
 
 1. **Header/Navbar** - Add mobile menu
 2. **BookCard** - Full width on mobile
-3. **ArticleCard** - Full width on mobile  
+3. **ArticleCard** - Full width on mobile
 4. **PageHeader** - Smaller text on mobile
 5. **FeatureCard** - Full width on mobile
 
@@ -194,4 +188,3 @@ Want me to make any of these responsive? Just ask! 🚀
 ---
 
 ✅ **Footer is now fully responsive and production-ready!**
-

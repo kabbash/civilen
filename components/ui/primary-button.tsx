@@ -1,8 +1,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
-export interface PrimaryButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface PrimaryButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
 }
 
@@ -19,7 +18,7 @@ const PrimaryButton = React.forwardRef<HTMLButtonElement, PrimaryButtonProps>(
           "transition-all duration-200",
           "hover:bg-orange-gradient-reverse hover:shadow-lg",
           "active:bg-[#ea5422]",
-          "disabled:opacity-50 disabled:cursor-not-allowed",
+          "disabled:cursor-not-allowed disabled:opacity-50",
           className
         )}
         {...props}
@@ -33,5 +32,3 @@ const PrimaryButton = React.forwardRef<HTMLButtonElement, PrimaryButtonProps>(
 PrimaryButton.displayName = "PrimaryButton";
 
 export { PrimaryButton };
-
-

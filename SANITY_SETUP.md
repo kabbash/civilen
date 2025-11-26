@@ -134,10 +134,12 @@ Article content uses Portable Text for rich text editing. Custom components and 
 ## Development vs Production
 
 ### Development
+
 - Content changes appear after 1 hour (revalidation period)
 - Use `useCdn: true` for faster reads
 
 ### Production
+
 - Deploy to Vercel with environment variables set
 - Content is cached and revalidated automatically
 - Sanity Studio available at `/studio`
@@ -145,16 +147,19 @@ Article content uses Portable Text for rich text editing. Custom components and 
 ## Troubleshooting
 
 ### Content not updating
+
 - Clear Next.js cache: `rm -rf .next`
 - Check revalidation time in page configs
 - Verify `NEXT_PUBLIC_SANITY_PROJECT_ID` is correct
 
 ### Studio not loading
+
 - Ensure all environment variables are set
 - Check browser console for errors
 - Verify Sanity dependencies are installed
 
 ### Images not displaying
+
 - Check image URLs in Sanity Studio
 - Verify images are properly uploaded
 - Check browser console for CORS errors
@@ -164,4 +169,3 @@ Article content uses Portable Text for rich text editing. Custom components and 
 - [Sanity Documentation](https://www.sanity.io/docs)
 - [Next.js + Sanity Guide](https://www.sanity.io/guides/nextjs)
 - [Portable Text Guide](https://www.sanity.io/docs/portable-text)
-

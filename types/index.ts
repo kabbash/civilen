@@ -1,5 +1,5 @@
-import { PortableTextBlock } from 'next-sanity';
-import type { Image as SanityImageType } from 'sanity'
+import { PortableTextBlock } from "next-sanity";
+import type { Image as SanityImageType } from "sanity";
 
 export interface Book {
   id?: string;
@@ -55,4 +55,3 @@ export interface Errata {
   dateReported: string;
   status?: string;
 }
-

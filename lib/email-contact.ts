@@ -1,4 +1,4 @@
-import { Resend } from 'resend'
+import { Resend } from "resend";
 
 /**
  * Send contact form email
@@ -9,14 +9,14 @@ export async function sendContactEmail({
   subject,
   message,
 }: {
-  name: string
-  email: string
-  subject: string
-  message: string
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
 }) {
-  const resend = new Resend(process.env.RESEND_API_KEY)
-  const fromEmail = process.env.CONTACT_FROM_EMAIL || 'CivilEn Contact <onboarding@resend.dev>'
-  const toEmail = process.env.CONTACT_TO_EMAIL || 'info@civilenpublishing.com'
+  const resend = new Resend(process.env.RESEND_API_KEY);
+  const fromEmail = process.env.CONTACT_FROM_EMAIL || "CivilEn Contact <onboarding@resend.dev>";
+  const toEmail = process.env.CONTACT_TO_EMAIL || "info@civilenpublishing.com";
 
   const html = `
     <!DOCTYPE html>
@@ -53,7 +53,7 @@ export async function sendContactEmail({
           </div>
           <div class="field">
             <div class="label">Message:</div>
-            <div class="value">${message.replace(/\n/g, '<br>')}</div>
+            <div class="value">${message.replace(/\n/g, "<br>")}</div>
           </div>
         </div>
         <div class="footer">
@@ -63,7 +63,7 @@ export async function sendContactEmail({
       </div>
     </body>
     </html>
-  `
+  `;
 
   const text = `
     New Contact Form Submission
@@ -77,9 +77,9 @@ export async function sendContactEmail({
     
     ---
     Reply to: ${email}
-  `.trim()
+  `.trim();
 
-  console.log('📧 Sending contact email to:', toEmail)
+  console.log("📧 Sending contact email to:", toEmail);
 
   try {
     const { data, error } = await resend.emails.send({
@@ -89,16 +89,15 @@ export async function sendContactEmail({
       subject: `Contact Form: ${subject}`,
       html,
       text,
-    })
+    });
 
     if (error) {
-      throw error
+      throw error;
     }
 
-    return { success: true, data }
+    return { success: true, data };
   } catch (error) {
-    console.error('Contact email sending failed:', error)
-    return { success: false, error }
+    console.error("Contact email sending failed:", error);
+    return { success: false, error };
   }
 }
-

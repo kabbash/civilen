@@ -12,33 +12,23 @@ interface ArticleCardProps {
 }
 
 export function ArticleCard({ article, imageUrl }: ArticleCardProps) {
-  
   // Default image if none provided
   const articleImage = imageUrl || "/images/articles/default-article.jpg";
 
   return (
-    <div
-      className="relative flex flex-col items-center justify-end gap-6 p-3.5 w-[416px] h-[450px] rounded-[4px]"
-    >
+    <div className="relative flex h-[450px] w-[416px] flex-col items-center justify-end gap-6 rounded-[4px] p-3.5">
       {/* Background Image with Overlay */}
-      <div className="absolute inset-0 pointer-events-none rounded-[4px]">
+      <div className="pointer-events-none absolute inset-0 rounded-[4px]">
         <div className="absolute inset-0 overflow-hidden rounded-[4px]">
-          <Image
-            src={articleImage}
-            alt={article.title}
-            fill
-            className="object-cover"
-          />
+          <Image src={articleImage} alt={article.title} fill className="object-cover" />
         </div>
-        <div className="absolute inset-0 bg-linear-to-b from-[rgba(0,0,0,0.1)] to-[#000000] rounded-[4px]" />
+        <div className="absolute inset-0 rounded-[4px] bg-linear-to-b from-[rgba(0,0,0,0.1)] to-[#000000]" />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col flex-1 items-center justify-end gap-6 p-2.5 w-full backdrop-blur-[5px] bg-[rgba(0,0,0,0.5)]">
-        <div className="flex flex-col gap-2.5 text-white w-full">
-          <h3 className="font-gotham-medium text-[28px] leading-[42px]">
-            {article.title}
-          </h3>
+      <div className="relative z-10 flex w-full flex-1 flex-col items-center justify-end gap-6 bg-[rgba(0,0,0,0.5)] p-2.5 backdrop-blur-[5px]">
+        <div className="flex w-full flex-col gap-2.5 text-white">
+          <h3 className="font-gotham-medium text-[28px] leading-[42px]">{article.title}</h3>
         </div>
         <Link href={`/articles/${article.slug}`} className="w-full">
           <PrimaryButton className="w-full">Read Article</PrimaryButton>
@@ -47,4 +37,3 @@ export function ArticleCard({ article, imageUrl }: ArticleCardProps) {
     </div>
   );
 }
-

@@ -54,6 +54,7 @@ https://your-domain.vercel.app/api/webhook/notify-subscribers?x-vercel-protectio
 ```
 
 **Steps:**
+
 1. Go to Sanity Dashboard: https://www.sanity.io/manage
 2. Navigate to: **API** → **Webhooks**
 3. Edit your webhook
@@ -91,6 +92,7 @@ https://your-app-git-main-your-team.vercel.app/api/webhook/notify-subscribers?x-
 ```
 
 **Breaking it down:**
+
 - Base URL: `https://your-app-git-main-your-team.vercel.app`
 - Endpoint: `/api/webhook/notify-subscribers`
 - Bypass parameter: `?x-vercel-protection-bypass=X3bYourToken`
@@ -122,6 +124,7 @@ curl -X POST "https://your-app.vercel.app/api/webhook/notify-subscribers?x-verce
 ```
 
 Expected response (200 OK):
+
 ```json
 {
   "message": "Notification processed successfully",
@@ -166,6 +169,7 @@ https://abc123.ngrok.io/api/webhook/notify-subscribers
 ## Recommended Setup for Each Environment
 
 ### Development (Local Testing)
+
 ```
 Use: ngrok
 URL: https://random.ngrok.io/api/webhook/notify-subscribers
@@ -173,6 +177,7 @@ Protection: None needed
 ```
 
 ### Staging/Preview (Vercel Preview)
+
 ```
 Use: Bypass token
 URL: https://app-git-branch.vercel.app/api/webhook/notify-subscribers?x-vercel-protection-bypass=TOKEN
@@ -180,6 +185,7 @@ Protection: Enabled with bypass
 ```
 
 ### Production
+
 ```
 Use: Custom domain
 URL: https://civilenpublishing.com/api/webhook/notify-subscribers
@@ -214,13 +220,17 @@ Protection: Usually disabled or use bypass token
 Based on your current situation, I recommend:
 
 ### For Now (Testing & Development):
+
 **Use ngrok** - No bypass token needed, works immediately
+
 ```bash
 ngrok http 3000
 ```
 
 ### For Production:
+
 **Use your custom domain** - No bypass token needed if protection is disabled on production
+
 ```
 https://civilenpublishing.com/api/webhook/notify-subscribers
 ```
@@ -229,15 +239,14 @@ This way you avoid dealing with bypass tokens entirely!
 
 ## Summary
 
-| Method | Pros | Cons | Best For |
-|--------|------|------|----------|
-| Bypass Token | Works with all Vercel deployments | Requires token management | Preview deployments |
-| Custom Domain | No token needed, clean URLs | Requires domain setup | Production |
-| ngrok | Easy local testing | Temporary URLs | Development |
+| Method        | Pros                              | Cons                      | Best For            |
+| ------------- | --------------------------------- | ------------------------- | ------------------- |
+| Bypass Token  | Works with all Vercel deployments | Requires token management | Preview deployments |
+| Custom Domain | No token needed, clean URLs       | Requires domain setup     | Production          |
+| ngrok         | Easy local testing                | Temporary URLs            | Development         |
 
 Choose the method that best fits your workflow!
 
 ---
 
 Need help with any of these steps? Let me know!
-

@@ -9,12 +9,14 @@ Updated home page components to accurately match the Figma design based on the s
 ### 1. **HeroSection** - Major Update ✅
 
 #### Before (Incorrect):
+
 - Plain white background
 - Text only on left
 - No hero image
 - Centered button alignment
 
 #### After (Correct):
+
 - ✅ Peachy/beige background (#f5e6e0)
 - ✅ Rounded container with proper spacing
 - ✅ Two-column layout (text left, image right)
@@ -23,6 +25,7 @@ Updated home page components to accurately match the Figma design based on the s
 - ✅ Button aligned left with badge below
 
 #### Visual Layout:
+
 ```
 ┌───────────────────────────────────────────┐
 │  [Peachy/Beige Background Container]      │
@@ -37,12 +40,14 @@ Updated home page components to accurately match the Figma design based on the s
 ### 2. **OnlineBanksSection** - Complete Redesign ✅
 
 #### Before (Incorrect):
+
 - 3 separate cards in grid
 - Each with title, description, button
 - No images or special styling
 - Wrong content entirely
 
 #### After (Correct):
+
 - ✅ "Coming Soon" banner with background image
 - ✅ Construction worker background photo
 - ✅ Glassmorphism card (backdrop blur + white/80)
@@ -51,6 +56,7 @@ Updated home page components to accurately match the Figma design based on the s
 - ✅ Right-aligned card layout
 
 #### Visual Layout:
+
 ```
 ┌──────────────────────────────────────────────┐
 │  [Background: Construction Workers Photo]     │
@@ -67,11 +73,13 @@ Updated home page components to accurately match the Figma design based on the s
 ### 3. **Page Structure** - Reordered ✅
 
 #### Before:
+
 ```
 Hero → Books → Online Banks → Features → Articles
 ```
 
 #### After (Matches Figma):
+
 ```
 Hero → Books → Online Banks → Articles → Features
 ```
@@ -81,31 +89,34 @@ Hero → Books → Online Banks → Articles → Features
 ### 4. **Assets Downloaded** ✅
 
 **New Assets:**
+
 - `/images/online-banks/coming-soon-badge.png` - "Coming Soon" graphic
 - `/images/online-banks/background.jpg` - Construction workers photo
 - `/images/hero/README.md` - Placeholder guide for hero image
 
 **Hero Image:**
+
 - Created placeholder directory
 - Added README with specifications
 - Need to add actual `engineer-construction.jpg` from Figma
 
 ## Components Status
 
-| Component | Status | Matches Figma |
-|-----------|--------|---------------|
-| HeroSection | ✅ Updated | Yes |
-| BooksSection | ✅ Correct | Yes |
-| OnlineBanksSection | ✅ Updated | Yes |
-| ArticlesSection | ✅ Correct | Yes |
-| FeaturesSection | ✅ Correct | Yes |
-| SectionHeader | ✅ Correct | Yes |
+| Component          | Status     | Matches Figma |
+| ------------------ | ---------- | ------------- |
+| HeroSection        | ✅ Updated | Yes           |
+| BooksSection       | ✅ Correct | Yes           |
+| OnlineBanksSection | ✅ Updated | Yes           |
+| ArticlesSection    | ✅ Correct | Yes           |
+| FeaturesSection    | ✅ Correct | Yes           |
+| SectionHeader      | ✅ Correct | Yes           |
 
 ## Visual Comparison
 
 ### Hero Section
 
 **Figma Design:**
+
 - Peachy background container
 - Large headline on left
 - Construction image on right
@@ -116,6 +127,7 @@ Hero → Books → Online Banks → Articles → Features
 ### Online Banks
 
 **Figma Design:**
+
 - Background photo
 - "Coming Soon" badge
 - Description card on right
@@ -126,6 +138,7 @@ Hero → Books → Online Banks → Articles → Features
 ### Other Sections
 
 **Figma Design:**
+
 - Books: 2 cards side by side
 - Articles: 3 cards in row
 - Features: 3 circular badges at bottom
@@ -136,17 +149,17 @@ Hero → Books → Online Banks → Articles → Features
 
 ### Hero Section
 
-| Screen | Layout |
-|--------|--------|
-| Mobile | Stack vertically, hide image |
-| Tablet | Stack, show smaller image |
-| Desktop | Side-by-side layout |
+| Screen  | Layout                       |
+| ------- | ---------------------------- |
+| Mobile  | Stack vertically, hide image |
+| Tablet  | Stack, show smaller image    |
+| Desktop | Side-by-side layout          |
 
 ### Online Banks
 
-| Screen | Layout |
-|--------|--------|
-| Mobile | Full-width card |
+| Screen  | Layout                          |
+| ------- | ------------------------------- |
+| Mobile  | Full-width card                 |
 | Desktop | Card on right, image background |
 
 ## Missing Assets
@@ -156,11 +169,13 @@ Hero → Books → Online Banks → Articles → Features
 **File:** `/images/hero/engineer-construction.jpg`
 
 **How to Get:**
+
 1. Export from Figma (Frame 16 background layer)
 2. Use stock photo of structural engineer + construction
 3. Dimensions: At least 800x600px
 
 **Without Image:**
+
 - Section will show empty space on desktop
 - Still functional, just missing visual element
 
@@ -200,6 +215,7 @@ bg-[rgba(234,84,34,0.05)] mix-blend-lighten
 - [x] No linter errors
 
 ### Still Need:
+
 - [ ] Add hero image (`engineer-construction.jpg`)
 - [ ] Test with real book data
 - [ ] Test with real article data
@@ -223,6 +239,7 @@ npm run dev
 ```
 
 **Expected Results:**
+
 1. Hero with peachy background ✅
 2. Hero image placeholder on right (or empty space) ⚠️
 3. Books section with 2 cards ✅
@@ -233,11 +250,13 @@ npm run dev
 ## Next Steps
 
 ### Immediate:
+
 1. **Add hero image** - Export from Figma or use placeholder
 2. **Test layout** - Verify all sections align properly
 3. **Check spacing** - Ensure margins/padding match Figma
 
 ### Optional:
+
 1. Fine-tune responsive breakpoints
 2. Add animations/transitions
 3. Optimize image loading
@@ -248,6 +267,7 @@ npm run dev
 **Source:** https://www.figma.com/design/cqBKc3wzIQFzdcVgeiiIdp/CivilEn?node-id=1-2
 
 **Key Sections Reviewed:**
+
 - Frame 16 (Hero with background)
 - Frame 20 (Online Banks "Coming Soon")
 - Overall page layout and spacing
@@ -269,5 +289,3 @@ All components have been corrected to match the design specifications.
 **One Asset Needed:** Hero image (`engineer-construction.jpg`)
 
 Everything else is production-ready! ✨
-
-

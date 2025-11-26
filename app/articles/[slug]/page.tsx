@@ -48,38 +48,36 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
   }
 
   // Handle article image - use Sanity image if available, otherwise default
-  const articleImageUrl = article.image 
-    ? (typeof article.image === 'string' 
-        ? article.image 
-        : urlForImage(article.image)?.url() || '/images/articles/default-article.jpg')
-    : '/images/articles/default-article.jpg';
+  const articleImageUrl = article.image
+    ? typeof article.image === "string"
+      ? article.image
+      : urlForImage(article.image)?.url() || "/images/articles/default-article.jpg"
+    : "/images/articles/default-article.jpg";
 
   // Check if content is string or Portable Text
   const isPortableText = Array.isArray(article.content);
 
   return (
-    <main className="relative w-full min-h-screen bg-white">
+    <main className="relative min-h-screen w-full bg-white">
       {/* Hero Section with Background Pattern */}
       <section className="relative h-[600px] w-full overflow-hidden">
         {/* Background with abstract pattern */}
         <div className="absolute inset-0">
-          <div className="relative w-full h-full bg-gradient-to-r from-[#4a7c7e] via-[#6b4d7a] to-[#5a8b8d]">
+          <div className="relative h-full w-full bg-gradient-to-r from-[#4a7c7e] via-[#6b4d7a] to-[#5a8b8d]">
             <Image
               src={articleImageUrl}
               alt={article.title}
               fill
-              className="object-cover mix-blend-overlay opacity-40"
+              className="object-cover opacity-40"
               priority
             />
           </div>
-          {/* Dark Overlay */}
-          <div className="absolute inset-0 bg-black/30" />
         </div>
 
         {/* Article Content - Overlapping hero */}
-        <div className="absolute left-[calc(16.67%+46px)] top-[340px] w-[868px] max-w-[calc(100%-80px)] flex flex-col gap-10 z-10">
+        <div className="absolute top-[340px] left-[calc(16.67%+46px)] z-10 flex w-[868px] max-w-[calc(100%-80px)] flex-col gap-10">
           {/* Article Title */}
-          <div className="backdrop-blur-[10px] bg-[rgba(255,255,255,0.8)] px-10 py-2.5 inline-block">
+          <div className="inline-block bg-[rgba(255,255,255,0.8)] px-10 py-2.5 backdrop-blur-[10px]">
             <h1 className="font-gotham-bold text-4xl leading-[54px] text-[#ea5422]">
               {article.title}
             </h1>
@@ -88,19 +86,16 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
       </section>
 
       {/* Article Content Body - Below hero */}
-      <section className="relative max-w-[1440px] mx-auto px-20 pb-[100px]">
-        <div className="ml-[calc(16.67%-34px)] w-[868px] max-w-full -mt-[160px]">
-          <div className="backdrop-blur-[10px] bg-[rgba(255,255,255,0.8)] rounded-[4px] p-10">
+      <section className="relative mx-auto max-w-[1440px] px-20 pb-[100px]">
+        <div className="-mt-[160px] ml-[calc(16.67%-34px)] w-[868px] max-w-full">
+          <div className="rounded-[4px] bg-[rgba(255,255,255,0.8)] p-10 backdrop-blur-[10px]">
             <div className="font-gotham-book text-lg leading-[27px] text-black">
               {/* Render article content - handle both Portable Text and string */}
               {isPortableText ? (
-                <PortableText 
-                  value={article.content as any} 
-                  components={portableTextComponents}
-                />
+                <PortableText value={article.content} components={portableTextComponents} />
               ) : (
                 <div className="space-y-5">
-                  {(article.content as string).split('\n\n').map((paragraph, index) => (
+                  {(article.content as string).split("\n\n").map((paragraph, index) => (
                     <p key={index}>{paragraph}</p>
                   ))}
                 </div>
@@ -112,4 +107,3 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
     </main>
   );
 }
-

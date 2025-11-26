@@ -30,22 +30,22 @@ You're getting a permissions error because the Sanity client needs a **write tok
 ### Step 2: Add Token to Your Environment Variables
 
 1. **Open your `.env.local` file** in the project root
-   
 2. **Add the token**:
+
    ```env
    # Sanity Configuration
    NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
    NEXT_PUBLIC_SANITY_DATASET=production
-   
+
    # Sanity API Token with write permissions (keep this secret!)
    SANITY_API_TOKEN=skXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-   
+
    # Newsletter Webhook Secret
    SANITY_WEBHOOK_SECRET=your_webhook_secret
-   
+
    # Email Service
    RESEND_API_KEY=re_your_key
-   
+
    # Site URL
    NEXT_PUBLIC_SITE_URL=http://localhost:3000
    ```
@@ -87,6 +87,7 @@ When deploying to Vercel, Netlify, or other platforms:
 3. Use different tokens for different environments
 
 **Example for Vercel:**
+
 - Go to: Project Settings → Environment Variables
 - Add each variable separately
 - Set the appropriate environment (Production, Preview, Development)
@@ -96,6 +97,7 @@ When deploying to Vercel, Netlify, or other platforms:
 ### Still Getting Permission Errors?
 
 1. **Check the token is correct**
+
    ```bash
    # In your terminal, check if the token is set:
    echo $SANITY_API_TOKEN
@@ -113,12 +115,13 @@ When deploying to Vercel, Netlify, or other platforms:
 4. **Check the token in the API route**
    - Add temporary logging to verify:
    ```typescript
-   console.log('Token exists:', !!process.env.SANITY_API_TOKEN)
+   console.log("Token exists:", !!process.env.SANITY_API_TOKEN);
    ```
 
 ### Token Not Found?
 
 If you see `Token exists: false`:
+
 - Make sure `.env.local` is in the project root (same folder as `package.json`)
 - Check for typos in the variable name
 - Make sure there are no spaces around the `=` sign
@@ -149,6 +152,7 @@ After setting up the token:
 ## Need Help?
 
 If you're still having issues:
+
 1. Check the console for error messages
 2. Verify all environment variables are set
 3. Make sure you restarted the server after adding the token
@@ -157,4 +161,3 @@ If you're still having issues:
 ---
 
 **Remember**: The API token is like a password - keep it secret and never share it publicly!
-

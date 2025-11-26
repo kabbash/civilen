@@ -5,11 +5,6 @@ export const metadata: Metadata = {
   description: "Report errors and view corrections for our published books",
 };
 
-export default function ErrataLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function ErrataLayout({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
-

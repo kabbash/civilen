@@ -13,7 +13,8 @@ export interface NavLinkProps {
 
 export function NavLink({ href, children, className }: NavLinkProps) {
   const pathname = usePathname();
-  const isActive = pathname === href;
+  const isHome = href === "/";
+  const isActive = isHome ? pathname === href : pathname.startsWith(href);
 
   return (
     <Link
@@ -32,5 +33,3 @@ export function NavLink({ href, children, className }: NavLinkProps) {
     </Link>
   );
 }
-
-

@@ -10,11 +10,13 @@ This is fine for **testing**, but for **production** you should verify your own 
 ## Option 1: Keep Using Test Domain (Quick Testing)
 
 **Pros:**
+
 - ✅ Works immediately
 - ✅ No setup needed
 - ✅ Good for testing
 
 **Cons:**
+
 - ❌ Emails come from `onboarding@resend.dev` (not branded)
 - ❌ Limited sending (100 emails/day)
 - ❌ May go to spam more often
@@ -70,6 +72,7 @@ from: 'CivilEn Publishing <newsletter@civilenpublishing.com>',
 ```
 
 Then commit and push:
+
 ```bash
 git add lib/email.ts
 git commit -m "chore: use verified civilenpublishing.com domain"
@@ -94,6 +97,7 @@ git push
 ### Check Resend Logs
 
 To see email delivery status:
+
 1. Go to: https://resend.com/emails
 2. You'll see all sent emails with status:
    - ✅ **Delivered** - Success
@@ -107,6 +111,7 @@ To see email delivery status:
 Your newsletters include:
 
 ### For New Articles:
+
 - Subject: `New Article: [Article Title]`
 - Branded header with CivilEn Publishing
 - Article title and description
@@ -114,6 +119,7 @@ Your newsletters include:
 - Company info and unsubscribe link
 
 ### For New Books:
+
 - Subject: `New Book Available: [Book Title]`
 - Branded header with CivilEn Publishing
 - Book title and description
@@ -125,10 +131,12 @@ Your newsletters include:
 ## Email Sending Limits
 
 ### Resend Test Domain (`onboarding@resend.dev`):
+
 - 100 emails per day
 - 1 email per second
 
 ### Verified Domain:
+
 - Free tier: 3,000 emails/month
 - Paid tiers: Up to millions/month
 
@@ -137,12 +145,15 @@ Your newsletters include:
 ## Next Steps
 
 ### For Testing (Now):
+
 ✅ Everything is ready! Test by:
+
 1. Subscribe to newsletter
 2. Publish content in Sanity
 3. Check your inbox
 
 ### For Production (Later):
+
 1. Verify your domain in Resend
 2. Update the `from` email in code
 3. Redeploy
@@ -167,6 +178,7 @@ Your newsletters include:
 ### Emails Going to Spam?
 
 Using your own verified domain helps, but also:
+
 - Add SPF, DKIM records (Resend provides these)
 - Warm up your domain by sending gradually
 - Ask subscribers to whitelist your email
@@ -177,14 +189,15 @@ Using your own verified domain helps, but also:
 ## Summary
 
 **Right now:**
+
 - ✅ Webhook works perfectly
 - ✅ Emails send from `onboarding@resend.dev`
 - ✅ Ready for testing
 
 **For production:**
+
 - Verify `civilenpublishing.com` in Resend
 - Update sender email in code
 - Emails will be fully branded
 
 Test it now and verify everything works! 🎉
-
