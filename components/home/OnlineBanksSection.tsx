@@ -11,9 +11,10 @@ export function OnlineBanksSection() {
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/online-banks/background.png"
+            src="/images/online-banks/background.jpg"
             alt="Construction workers"
             fill
+            sizes="100vw"
             className="object-cover"
           />
           {/* Overlay */}
@@ -28,6 +29,7 @@ export function OnlineBanksSection() {
               src="/images/online-banks/coming-soon-badge.png"
               alt="Coming Soon"
               fill
+              sizes="220px"
               className="object-contain"
             />
           </div>

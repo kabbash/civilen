@@ -56,13 +56,13 @@ export default async function BookDetailPage({ params }: BookDetailPageProps) {
       : urlForImage(book.coverImage)?.url() || "/images/articles/default-article.jpg";
 
   return (
-    <main className="relative min-h-screen w-full bg-white">
-      <div className="mx-auto max-w-[1440px]">
+    <main className="relative min-h-screen w-full overflow-x-hidden bg-white">
+      <div className="mx-auto w-full max-w-[1440px]">
         {/* Main Grid Layout with Orange Borders */}
-        <div className="grid grid-cols-[545px_1fr] gap-0">
+        <div className="flex w-full flex-col gap-0 md:grid md:grid-cols-[545px_1fr]">
           {/* Left Column - Book Cover */}
-          <div className="mt-10 border-r border-[#ea5422] pr-[49px] pb-[160px] pl-20">
-            <div className="relative h-[600px] w-[416px] overflow-hidden rounded-tl-[8px] rounded-bl-[8px] shadow-[0px_3px_10px_0px_rgba(190,64,22,0.25)]">
+          <div className="mt-6 flex w-full justify-center pr-0 pb-6 pl-0 md:mt-10 md:block md:border-r md:border-[#ea5422] md:pr-[49px] md:pb-[160px] md:pl-20">
+            <div className="relative h-[400px] w-[270px] overflow-hidden rounded-tl-[8px] rounded-bl-[8px] shadow-[0px_3px_10px_0px_rgba(190,64,22,0.25)] md:h-[600px] md:w-[416px]">
               <Image
                 src={coverImageUrl}
                 alt={book.title}
@@ -74,17 +74,17 @@ export default async function BookDetailPage({ params }: BookDetailPageProps) {
           </div>
 
           {/* Right Column - Book Details */}
-          <div className="mt-20 pr-20 pb-[160px] pl-[75px]">
+          <div className="mt-6 w-full pr-4 pb-8 pl-4 md:mt-20 md:pr-20 md:pb-[160px] md:pl-[75px]">
             {/* Title and Description */}
-            <div className="mb-6 flex flex-col gap-2.5">
-              <h1 className="font-gotham-medium text-4xl leading-[54px] text-[#ea5422]">
+            <div className="mb-4 flex w-full flex-col gap-2 md:mb-6 md:gap-2.5">
+              <h1 className="font-gotham-medium w-full text-2xl leading-[36px] break-words text-[#ea5422] md:text-4xl md:leading-[54px]">
                 {book.title}
               </h1>
             </div>
 
             {/* Long Description */}
             {book.fullDescription && (
-              <div className="max-w-[740px]">
+              <div className="w-full max-w-full md:max-w-[740px]">
                 <PortableText value={book.fullDescription} components={portableTextComponents} />
               </div>
             )}
@@ -92,24 +92,24 @@ export default async function BookDetailPage({ params }: BookDetailPageProps) {
         </div>
 
         {/* Bottom Section with Top Border */}
-        <div className="grid grid-cols-[545px_1fr] gap-0 border-t border-[#ea5422]">
+        <div className="flex w-full flex-col gap-6 border-t border-[#ea5422] md:grid md:grid-cols-[545px_1fr] md:gap-0">
           {/* Left Column - Buy Button */}
-          <div className="border-r border-[#ea5422] pt-[30px] pr-[49px] pb-[70px] pl-20">
-            <div className="flex w-[417px] flex-col gap-2">
+          <div className="w-full pt-6 pr-4 pb-6 pl-4 md:border-r md:border-[#ea5422] md:pt-[30px] md:pr-[49px] md:pb-[70px] md:pl-20">
+            <div className="flex w-full flex-col gap-2 md:w-[417px]">
               <Link href={book.amazonLink} target="_blank" rel="noopener noreferrer">
                 <PrimaryButton className="w-full">Buy Now on Amazon.com</PrimaryButton>
               </Link>
-              <p className="font-gotham-book text-right text-xs leading-[18px] text-[#2e2d2d]">
+              <p className="font-gotham-book w-full text-right text-xs leading-[18px] text-[#2e2d2d]">
                 Secure purchase and fulfillment handled by Amazon.
               </p>
             </div>
           </div>
 
           {/* Right Column - Errata Link */}
-          <div className="flex justify-end pt-[51px] pr-20 pb-[70px] pl-[75px]">
+          <div className="flex w-full justify-center pt-0 pr-4 pb-8 pl-4 md:justify-end md:pt-[51px] md:pr-20 md:pb-[70px] md:pl-[75px]">
             <Link
               href="/errata"
-              className="font-gotham-medium text-lg leading-[27px] text-[#ea5422] underline transition-all hover:no-underline"
+              className="font-gotham-medium text-center text-base leading-[24px] break-words text-[#ea5422] underline transition-all hover:no-underline md:text-left md:text-lg md:leading-[27px]"
             >
               Found an error? Check the Errata Page →
             </Link>

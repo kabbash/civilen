@@ -58,9 +58,9 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
   const isPortableText = Array.isArray(article.content);
 
   return (
-    <main className="relative min-h-screen w-full bg-white">
+    <main className="relative min-h-screen w-full overflow-x-hidden bg-white">
       {/* Hero Section with Background Pattern */}
-      <section className="relative h-[600px] w-full overflow-hidden">
+      <section className="relative h-[400px] w-full overflow-hidden md:h-[600px]">
         {/* Background with abstract pattern */}
         <div className="absolute inset-0">
           <div className="relative h-full w-full bg-gradient-to-r from-[#4a7c7e] via-[#6b4d7a] to-[#5a8b8d]">
@@ -75,10 +75,10 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
         </div>
 
         {/* Article Content - Overlapping hero */}
-        <div className="absolute top-[340px] left-[calc(16.67%+46px)] z-10 flex w-[868px] max-w-[calc(100%-80px)] flex-col gap-10">
+        <div className="absolute top-[180px] left-1/2 z-10 flex w-[calc(100%-2rem)] max-w-[calc(100%-2rem)] -translate-x-1/2 flex-col gap-6 md:top-[340px] md:left-[calc(16.67%+46px)] md:w-[868px] md:max-w-[calc(100%-80px)] md:translate-x-0 md:gap-10">
           {/* Article Title */}
-          <div className="inline-block bg-[rgba(255,255,255,0.8)] px-10 py-2.5 backdrop-blur-[10px]">
-            <h1 className="font-gotham-bold text-4xl leading-[54px] text-[#ea5422]">
+          <div className="inline-block bg-[rgba(255,255,255,0.8)] px-4 py-2 backdrop-blur-[10px] md:px-10 md:py-2.5">
+            <h1 className="font-gotham-bold text-2xl leading-[36px] break-words text-[#ea5422] md:text-4xl md:leading-[54px]">
               {article.title}
             </h1>
           </div>
@@ -86,17 +86,19 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
       </section>
 
       {/* Article Content Body - Below hero */}
-      <section className="relative mx-auto max-w-[1440px] px-20 pb-[100px]">
-        <div className="-mt-[160px] ml-[calc(16.67%-34px)] w-[868px] max-w-full">
-          <div className="rounded-[4px] bg-[rgba(255,255,255,0.8)] p-10 backdrop-blur-[10px]">
-            <div className="font-gotham-book text-lg leading-[27px] text-black">
+      <section className="relative mx-auto w-full max-w-[1440px] px-4 pb-[30px] md:px-20 md:pb-[70px]">
+        <div className="mx-auto -mt-[120px] w-full max-w-full md:-mt-[160px] md:ml-[calc(16.67%-34px)] md:w-[868px]">
+          <div className="rounded-[4px] bg-[rgba(255,255,255,0.8)] p-4 backdrop-blur-[10px] md:p-10">
+            <div className="font-gotham-book text-base leading-[24px] text-black md:text-lg md:leading-[27px]">
               {/* Render article content - handle both Portable Text and string */}
               {isPortableText ? (
                 <PortableText value={article.content} components={portableTextComponents} />
               ) : (
-                <div className="space-y-5">
+                <div className="space-y-4 md:space-y-5">
                   {(article.content as string).split("\n\n").map((paragraph, index) => (
-                    <p key={index}>{paragraph}</p>
+                    <p key={index} className="break-words">
+                      {paragraph}
+                    </p>
                   ))}
                 </div>
               )}

@@ -23,7 +23,7 @@ export function BookCard({ book, showLongDescription }: BookCardProps) {
 
   return (
     <div
-      className="relative mx-auto flex w-full max-w-[632px] flex-col items-center gap-6 rounded-[4px] p-8 transition-all duration-300"
+      className="relative mx-auto flex w-full max-w-[632px] flex-col items-center gap-4 rounded-[4px] p-4 transition-all duration-300 md:gap-6 md:p-8"
       style={{
         boxShadow: isHovered ? "0px 4px 15px 0px rgba(190, 64, 22, 0.25)" : "none",
       }}
@@ -44,7 +44,7 @@ export function BookCard({ book, showLongDescription }: BookCardProps) {
       </div>
 
       {/* Bookmark - top left */}
-      <div className="absolute top-0 left-8 z-10 h-[72px] w-10">
+      <div className="absolute top-0 left-4 z-10 h-[72px] w-10 md:left-8">
         <Image
           src={
             isHovered
@@ -58,7 +58,7 @@ export function BookCard({ book, showLongDescription }: BookCardProps) {
       </div>
 
       {/* Book Cover */}
-      <div className="relative z-10 h-[400px] w-[270px] shrink-0 rounded-tl-[8px] rounded-bl-[8px] shadow-[0px_3px_10px_0px_rgba(190,64,22,0.25)]">
+      <div className="relative z-10 h-[320px] w-[216px] shrink-0 rounded-tl-[8px] rounded-bl-[8px] shadow-[0px_3px_10px_0px_rgba(190,64,22,0.25)] md:h-[400px] md:w-[270px]">
         <Image
           src={coverImageUrl}
           alt={book.title}
@@ -69,10 +69,10 @@ export function BookCard({ book, showLongDescription }: BookCardProps) {
 
       {/* Content */}
       <div className="relative z-10 flex w-full flex-col items-center gap-2">
-        <h3 className="font-gotham-medium text-center text-[28px] leading-[42px] text-black">
+        <h3 className="font-gotham-medium text-center text-xl leading-[30px] text-black md:text-[28px] md:leading-[42px]">
           {book.title}
         </h3>
-        <p className="font-gotham-book line-clamp-3 text-center text-lg leading-[27px] text-black">
+        <p className="font-gotham-book line-clamp-3 px-2 text-center text-base leading-[24px] text-black md:text-lg md:leading-[27px]">
           {showLongDescription ? book.longDescription : book.description}
         </p>
       </div>

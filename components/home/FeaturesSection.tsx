@@ -17,15 +17,15 @@ export function FeaturesSection() {
   ];
 
   return (
-    <section className="container mx-auto px-4 py-12 lg:px-20 lg:py-16">
+    <section className="container mx-auto px-4 py-8 md:py-12 lg:px-20 lg:py-16">
       {/* Centered with space between cards */}
-      <div className="flex flex-col items-center justify-center gap-4 lg:flex-row">
+      <div className="flex flex-col items-center justify-center gap-4 md:gap-6 lg:flex-row lg:gap-4">
         {features.map((feature, index) => (
           <FeatureCard
             key={index}
             title={feature.title}
             count={feature.count}
-            className="w-full lg:w-[416px]"
+            className="w-full max-w-[416px] lg:w-[416px]"
           />
         ))}
       </div>

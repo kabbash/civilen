@@ -54,9 +54,9 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="relative min-h-screen w-full bg-white">
+    <main className="relative min-h-screen w-full overflow-x-hidden bg-white">
       {/* Hero Section with Engineer Background */}
-      <section className="relative h-[963px] w-full overflow-hidden">
+      <section className="relative h-[900px] w-full overflow-hidden md:h-[963px]">
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
@@ -69,23 +69,23 @@ export default function ContactPage() {
         </div>
 
         {/* Hero Title */}
-        <div className="absolute top-[140px] left-1/2 -translate-x-1/2 bg-[rgba(234,84,34,0.5)] px-10 py-2.5 backdrop-blur-[10px]">
-          <h1 className="font-gotham-bold text-5xl leading-[72px] whitespace-nowrap text-white">
+        <div className="absolute top-[30px] left-1/2 max-w-[90%] -translate-x-1/2 bg-[rgba(234,84,34,0.5)] px-4 py-2 backdrop-blur-[10px] md:top-[140px] md:px-10 md:py-2.5">
+          <h1 className="font-gotham-bold text-center text-2xl leading-[36px] text-white md:text-5xl md:leading-[72px] md:whitespace-nowrap">
             Inquiries and Support
           </h1>
         </div>
 
         {/* Contact Form */}
-        <div className="absolute top-[272px] left-1/2 w-[630px] -translate-x-1/2">
+        <div className="absolute top-[150px] left-1/2 w-[calc(100%-2rem)] max-w-[630px] -translate-x-1/2 md:top-[272px] md:w-[630px]">
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col gap-8 rounded-[4px] bg-[rgba(255,255,255,0.8)] px-[60px] py-6 shadow-[0px_3px_10px_0px_rgba(190,64,22,0.25)] backdrop-blur-[10px]"
+            className="flex flex-col gap-5 rounded-[4px] bg-[rgba(255,255,255,0.8)] px-4 py-6 shadow-[0px_3px_10px_0px_rgba(190,64,22,0.25)] backdrop-blur-[10px] md:gap-8 md:px-[60px]"
           >
             {/* Name Field */}
-            <div className="flex w-full flex-col gap-1.5">
+            <div className="flex w-full flex-col gap-1 md:gap-1.5">
               <label
                 htmlFor="name"
-                className="font-gotham-medium text-lg leading-[27px] text-black"
+                className="font-gotham-medium text-base leading-[24px] text-black md:text-lg md:leading-[27px]"
               >
                 Name
               </label>
@@ -96,15 +96,15 @@ export default function ContactPage() {
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 placeholder="John Doe"
                 required
-                className="font-gotham-book h-12 rounded-none border-0 border-b border-[#ea5422] bg-white px-4 py-2.5 text-lg shadow-[inset_0px_2px_4px_0px_rgba(0,0,0,0.1)] placeholder:opacity-60"
+                className="font-gotham-book h-10 rounded-none border-0 border-b border-[#ea5422] bg-white px-3 py-2 text-base shadow-[inset_0px_2px_4px_0px_rgba(0,0,0,0.1)] placeholder:opacity-60 md:h-12 md:px-4 md:py-2.5 md:text-lg"
               />
             </div>
 
             {/* Email Field */}
-            <div className="flex w-full flex-col gap-1.5">
+            <div className="flex w-full flex-col gap-1 md:gap-1.5">
               <label
                 htmlFor="email"
-                className="font-gotham-medium text-lg leading-[27px] text-black"
+                className="font-gotham-medium text-base leading-[24px] text-black md:text-lg md:leading-[27px]"
               >
                 Email
               </label>
@@ -115,15 +115,15 @@ export default function ContactPage() {
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 placeholder="johndoe@gmail.com"
                 required
-                className="font-gotham-book h-12 rounded-none border-0 border-b border-[#ea5422] bg-white px-4 py-2.5 text-lg shadow-[inset_0px_2px_4px_0px_rgba(0,0,0,0.1)] placeholder:opacity-60"
+                className="font-gotham-book h-10 rounded-none border-0 border-b border-[#ea5422] bg-white px-3 py-2 text-base shadow-[inset_0px_2px_4px_0px_rgba(0,0,0,0.1)] placeholder:opacity-60 md:h-12 md:px-4 md:py-2.5 md:text-lg"
               />
             </div>
 
             {/* Subject Field */}
-            <div className="flex w-full flex-col gap-1.5">
+            <div className="flex w-full flex-col gap-1 md:gap-1.5">
               <label
                 htmlFor="subject"
-                className="font-gotham-medium text-lg leading-[27px] text-black"
+                className="font-gotham-medium text-base leading-[24px] text-black md:text-lg md:leading-[27px]"
               >
                 Subject
               </label>
@@ -134,15 +134,15 @@ export default function ContactPage() {
                 onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                 placeholder="Subject title"
                 required
-                className="font-gotham-book h-12 rounded-none border-0 border-b border-[#ea5422] bg-white px-4 py-2.5 text-lg shadow-[inset_0px_2px_4px_0px_rgba(0,0,0,0.1)] placeholder:opacity-60"
+                className="font-gotham-book h-10 rounded-none border-0 border-b border-[#ea5422] bg-white px-3 py-2 text-base shadow-[inset_0px_2px_4px_0px_rgba(0,0,0,0.1)] placeholder:opacity-60 md:h-12 md:px-4 md:py-2.5 md:text-lg"
               />
             </div>
 
             {/* Message Field */}
-            <div className="flex w-full flex-col gap-1.5">
+            <div className="flex w-full flex-col gap-1 md:gap-1.5">
               <label
                 htmlFor="message"
-                className="font-gotham-medium text-lg leading-[27px] text-black"
+                className="font-gotham-medium text-base leading-[24px] text-black md:text-lg md:leading-[27px]"
               >
                 Message
               </label>
@@ -152,7 +152,7 @@ export default function ContactPage() {
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 placeholder="Type your message here..."
                 required
-                className="font-gotham-book h-[120px] resize-none rounded-none border-0 border-b border-[#ea5422] bg-white px-4 py-2.5 text-lg shadow-[inset_0px_2px_4px_0px_rgba(0,0,0,0.1)] placeholder:opacity-60"
+                className="font-gotham-book h-[100px] resize-none rounded-none border-0 border-b border-[#ea5422] bg-white px-3 py-2 text-base shadow-[inset_0px_2px_4px_0px_rgba(0,0,0,0.1)] placeholder:opacity-60 md:h-[120px] md:px-4 md:py-2.5 md:text-lg"
               />
             </div>
 
@@ -163,12 +163,12 @@ export default function ContactPage() {
 
             {/* Status Messages */}
             {submitStatus === "success" && (
-              <p className="font-gotham-medium text-center text-green-600">
+              <p className="font-gotham-medium text-center text-sm text-green-600 md:text-base">
                 Message sent successfully! We&apos;ll get back to you soon.
               </p>
             )}
             {submitStatus === "error" && (
-              <p className="font-gotham-medium text-center text-red-600">
+              <p className="font-gotham-medium text-center text-sm text-red-600 md:text-base">
                 Failed to send message. Please try again later.
               </p>
             )}
