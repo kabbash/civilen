@@ -2,10 +2,9 @@ import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getBookBySlug, getAllBooks } from "@/sanity/lib/fetch";
+import { getBookBySlug, generateBooksStaticParams } from "@/data";
 import { urlForImage } from "@/sanity/lib/image";
 import { PrimaryButton } from "@/components/ui/primary-button";
-import { Book } from "@/types";
 import { PortableText, portableTextComponents } from "@/sanity/lib/portableText";
 
 interface BookDetailPageProps {
@@ -16,10 +15,7 @@ interface BookDetailPageProps {
 
 // Generate static params for all books
 export async function generateStaticParams() {
-  const books = await getAllBooks();
-  return books.map((book: Book) => ({
-    slug: book.slug,
-  }));
+  return await generateBooksStaticParams();
 }
 
 export async function generateMetadata({ params }: BookDetailPageProps): Promise<Metadata> {
@@ -37,9 +33,6 @@ export async function generateMetadata({ params }: BookDetailPageProps): Promise
     description: book.description,
   };
 }
-
-// Revalidate every hour
-export const revalidate = 3600;
 
 export default async function BookDetailPage({ params }: BookDetailPageProps) {
   const { slug } = await params;

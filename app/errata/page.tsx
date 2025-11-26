@@ -2,8 +2,7 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { client } from "@/sanity/lib/client";
-import { errataQuery, booksWithErrataQuery } from "@/sanity/lib/queries";
+import { getAllErrata, getBooksWithErrata } from "@/data";
 import type { Book, Errata } from "@/types";
 
 export default function ErrataPage() {
@@ -15,10 +14,7 @@ export default function ErrataPage() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const [booksData, errataList] = await Promise.all([
-          client.fetch(booksWithErrataQuery),
-          client.fetch(errataQuery),
-        ]);
+        const [booksData, errataList] = await Promise.all([getBooksWithErrata(), getAllErrata()]);
         setBooks(booksData);
         setErrataData(errataList);
         if (booksData.length > 0) {

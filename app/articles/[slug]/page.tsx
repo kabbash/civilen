@@ -1,10 +1,9 @@
 import { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { getArticleBySlug, getAllArticles } from "@/sanity/lib/fetch";
+import { getArticleBySlug, generateArticlesStaticParams } from "@/data";
 import { urlForImage } from "@/sanity/lib/image";
 import { PortableText, portableTextComponents } from "@/sanity/lib/portableText";
-import { Article } from "@/types";
 
 interface ArticleDetailPageProps {
   params: Promise<{
@@ -14,10 +13,7 @@ interface ArticleDetailPageProps {
 
 // Generate static params for all articles
 export async function generateStaticParams() {
-  const articles = await getAllArticles();
-  return articles.map((article: Article) => ({
-    slug: article.slug,
-  }));
+  return await generateArticlesStaticParams();
 }
 
 export async function generateMetadata({ params }: ArticleDetailPageProps): Promise<Metadata> {
@@ -32,12 +28,9 @@ export async function generateMetadata({ params }: ArticleDetailPageProps): Prom
 
   return {
     title: `${article.title} | CivilEn Publishing`,
-    description: article.excerpt,
+    description: article.title,
   };
 }
-
-// Revalidate every hour
-export const revalidate = 3600;
 
 export default async function ArticleDetailPage({ params }: ArticleDetailPageProps) {
   const { slug } = await params;
@@ -75,10 +68,10 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
         </div>
 
         {/* Article Content - Overlapping hero */}
-        <div className="absolute top-[180px] left-1/2 z-10 flex w-[calc(100%-2rem)] max-w-[calc(100%-2rem)] -translate-x-1/2 flex-col gap-6 md:top-[340px] md:left-[calc(16.67%+46px)] md:w-[868px] md:max-w-[calc(100%-80px)] md:translate-x-0 md:gap-10">
+        <div className="absolute top-[180px] left-1/2 z-10 flex w-[calc(100%-2rem)] max-w-[calc(100%-2rem)] -translate-x-1/2 flex-col gap-6 md:top-[340px] md:w-[868px] md:max-w-[calc(100%-80px)] md:gap-10">
           {/* Article Title */}
           <div className="inline-block bg-[rgba(255,255,255,0.8)] px-4 py-2 backdrop-blur-[10px] md:px-10 md:py-2.5">
-            <h1 className="font-gotham-bold text-2xl leading-[36px] break-words text-[#ea5422] md:text-4xl md:leading-[54px]">
+            <h1 className="font-gotham-bold text-center text-2xl leading-[36px] break-words text-[#ea5422] md:text-4xl md:leading-[54px]">
               {article.title}
             </h1>
           </div>
@@ -87,19 +80,21 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
 
       {/* Article Content Body - Below hero */}
       <section className="relative mx-auto w-full max-w-[1440px] px-4 pb-[30px] md:px-20 md:pb-[70px]">
-        <div className="mx-auto -mt-[120px] w-full max-w-full md:-mt-[160px] md:ml-[calc(16.67%-34px)] md:w-[868px]">
+        <div className="mx-auto -mt-[120px] w-full max-w-full md:-mt-[160px] md:w-[868px]">
           <div className="rounded-[4px] bg-[rgba(255,255,255,0.8)] p-4 backdrop-blur-[10px] md:p-10">
             <div className="font-gotham-book text-base leading-[24px] text-black md:text-lg md:leading-[27px]">
               {/* Render article content - handle both Portable Text and string */}
-              {isPortableText ? (
+              {isPortableText && Array.isArray(article.content) ? (
                 <PortableText value={article.content} components={portableTextComponents} />
               ) : (
                 <div className="space-y-4 md:space-y-5">
-                  {(article.content as string).split("\n\n").map((paragraph, index) => (
-                    <p key={index} className="break-words">
-                      {paragraph}
-                    </p>
-                  ))}
+                  {String(article.content)
+                    .split("\n\n")
+                    .map((paragraph, index) => (
+                      <p key={index} className="break-words">
+                        {paragraph}
+                      </p>
+                    ))}
                 </div>
               )}
             </div>

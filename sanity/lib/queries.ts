@@ -26,7 +26,7 @@ export const bookBySlugQuery = groq`*[_type == "book" && slug.current == $slug][
   publishedAt
 }`;
 
-export const featuredBooksQuery = groq`*[_type == "book" && featured == true] | order(order asc) [0...2] {
+export const featuredBooksQuery = groq`*[_type == "book" && featured == true && defined(publishedAt)] | order(publishedAt desc) [0...2] {
   _id,
   title,
   "slug": slug.current,

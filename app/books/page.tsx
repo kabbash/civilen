@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { BookCard } from "@/components/books/BookCard";
-import { getAllBooks } from "@/sanity/lib/fetch";
+import { getAllBooks } from "@/data";
 import { Book } from "@/types";
 
 export const metadata: Metadata = {
@@ -8,9 +8,6 @@ export const metadata: Metadata = {
   description:
     "Browse our collection of PE Structural Engineering practice exams and study materials",
 };
-
-// Revalidate every hour
-export const revalidate = 3600;
 
 export default async function BooksPage() {
   const books = await getAllBooks();

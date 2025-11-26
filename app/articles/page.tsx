@@ -2,8 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { ArticleCard } from "@/components/articles/ArticleCard";
-import { client } from "@/sanity/lib/client";
-import { articlesQuery } from "@/sanity/lib/queries";
+import { getAllArticles } from "@/data";
 import type { Article } from "@/types";
 import { urlForImage } from "@/sanity/lib/image";
 
@@ -15,7 +14,7 @@ export default function ArticlesPage() {
   useEffect(() => {
     async function fetchArticles() {
       try {
-        const data = await client.fetch(articlesQuery);
+        const data = await getAllArticles();
         setArticles(data);
       } catch (error) {
         console.error("Error fetching articles:", error);

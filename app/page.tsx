@@ -6,7 +6,7 @@ import {
   OnlineBanksSection,
   ArticlesSection,
 } from "@/components/home";
-import { getFeaturedBooks, getFeaturedArticles } from "@/sanity/lib/fetch";
+import { getFeaturedBooks, getFeaturedArticles } from "@/data";
 
 export const metadata: Metadata = {
   title: "Master the PE Structural Exam | CivilEn Publishing",
@@ -14,11 +14,8 @@ export const metadata: Metadata = {
     "Uncompromising practice exams designed to perfectly mirror the NCEES CBT format. Get exam-ready with materials built by practicing structural engineers.",
 };
 
-// Revalidate every hour
-export const revalidate = 3600;
-
 export default async function HomePage() {
-  // Fetch featured books and articles from Sanity
+  // Fetch featured books and articles from Sanity with revalidation
   const [books, articles] = await Promise.all([getFeaturedBooks(), getFeaturedArticles()]);
 
   return (
