@@ -42,7 +42,7 @@ export default function ArticlesPage() {
 
   if (loading) {
     return (
-      <main className="relative flex min-h-screen w-full items-center justify-center bg-white pb-[400px]">
+      <main className="relative mt-20 flex min-h-screen w-full items-center justify-center bg-white pb-[400px]">
         <div className="text-center">
           <p className="font-gotham-book text-xl text-[#2e2d2d]">Loading articles...</p>
         </div>
@@ -51,7 +51,7 @@ export default function ArticlesPage() {
   }
 
   return (
-    <main className="relative min-h-screen w-full bg-white pb-[400px]">
+    <main className="relative min-h-screen w-full bg-white pb-[70px]">
       {/* Hero Section with Background Pattern */}
       <section className="relative h-[360px] w-full overflow-hidden">
         {/* Background with construction pattern */}
@@ -65,7 +65,7 @@ export default function ArticlesPage() {
         ></div>
 
         {/* Hero Title and Search */}
-        <div className="absolute top-[140px] left-1/2 flex -translate-x-1/2 flex-col items-center gap-2.5">
+        <div className="absolute top-[70px] left-1/2 flex -translate-x-1/2 flex-col items-center gap-2.5">
           <div className="bg-[rgba(234,84,34,0.5)] px-10 py-2.5 backdrop-blur-[10px]">
             <h1 className="font-gotham-bold mb-1.5 text-5xl leading-[72px] whitespace-nowrap text-white">
               SE Exam Strategies & Resources

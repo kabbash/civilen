@@ -33,7 +33,7 @@ export default async function HomePage() {
       <OnlineBanksSection />
 
       {/* Articles Section */}
-      <ArticlesSection articles={articles} />
+      {articles.length > 0 && <ArticlesSection articles={articles} />}
 
       {/* Features/Stats Section - At Bottom */}
       <FeaturesSection />

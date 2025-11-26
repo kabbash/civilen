@@ -23,14 +23,14 @@ export default function OnlineBanksPage() {
         </div>
 
         {/* Hero Title */}
-        <div className="absolute top-[140px] left-1/2 -translate-x-1/2 bg-gradient-to-r from-[#ea7922] to-[#ea5422] px-10 py-2.5">
+        <div className="absolute top-[50px] left-1/2 -translate-x-1/2 bg-gradient-to-r from-[#ea7922] to-[#ea5422] px-10 py-2.5">
           <h1 className="font-gotham-bold text-5xl leading-[72px] whitespace-nowrap text-white">
             PE Structural Practice Banks
           </h1>
         </div>
 
         {/* Content Card */}
-        <div className="absolute top-[292px] left-1/2 w-[848px] max-w-[calc(100%-80px)] -translate-x-1/2">
+        <div className="absolute top-[190px] left-1/2 w-[848px] max-w-[calc(100%-80px)] -translate-x-1/2">
           <div className="flex flex-col items-center gap-8 bg-white/90 px-8 py-12 backdrop-blur-sm">
             {/* Coming Soon Badge */}
             <div className="relative h-[280px] w-[240px]">
