@@ -3,7 +3,7 @@ import { articlesQuery, articleBySlugQuery, featuredArticlesQuery } from "@/sani
 import type { Article } from "@/types";
 
 // Revalidation time in seconds (1 hour)
-const REVALIDATE_TIME = 3600;
+const REVALIDATE_TIME = 60;
 
 /**
  * Fetch all articles with revalidation

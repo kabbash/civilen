@@ -3,7 +3,7 @@ import { errataQuery, errataByBookQuery, booksWithErrataQuery } from "@/sanity/l
 import type { Book, Errata } from "@/types";
 
 // Revalidation time in seconds (30 minutes for errata since it updates less frequently)
-const REVALIDATE_TIME = 1800;
+const REVALIDATE_TIME = 60;
 
 /**
  * Fetch all published errata with revalidation

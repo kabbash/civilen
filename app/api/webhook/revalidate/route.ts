@@ -9,19 +9,13 @@ export async function POST(request: NextRequest) {
     const secret = request.headers.get("x-sanity-webhook-secret");
     const envSecret = process.env.SANITY_WEBHOOK_SECRET;
 
-    console.log("[Webhook Revalidate] Received request");
-    console.log("[Webhook Revalidate] Has secret header:", !!secret);
-    console.log("[Webhook Revalidate] Secret header length:", secret?.length || 0);
-    console.log("[Webhook Revalidate] Env var configured:", !!envSecret);
-    console.log("[Webhook Revalidate] Env var length:", envSecret?.length || 0);
-
     if (!envSecret) {
       console.error(
         "[Webhook Revalidate] SANITY_WEBHOOK_SECRET environment variable not configured"
       );
       return NextResponse.json(
         {
-          message: "Webhook secret not configured",
+          message: "SANITY_WEBHOOK_SECRET secret not configured",
           debug: "SANITY_WEBHOOK_SECRET environment variable is not set",
         },
         { status: 500 }
@@ -44,11 +38,6 @@ export async function POST(request: NextRequest) {
     const trimmedEnvSecret = envSecret.trim();
 
     if (trimmedSecret !== trimmedEnvSecret) {
-      console.error("[Webhook Revalidate] Secret mismatch");
-      console.error("[Webhook Revalidate] Header length:", trimmedSecret.length);
-      console.error("[Webhook Revalidate] Env length:", trimmedEnvSecret.length);
-      console.error("[Webhook Revalidate] Header preview:", trimmedSecret.substring(0, 10) + "...");
-      console.error("[Webhook Revalidate] Env preview:", trimmedEnvSecret.substring(0, 10) + "...");
       return NextResponse.json(
         {
           message: "Unauthorized",
