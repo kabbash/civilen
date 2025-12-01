@@ -40,7 +40,7 @@ export async function sendEmail({ to, subject, html, text }: EmailData) {
 
   // Use environment variable or fallback to test domain
   const fromEmail =
-    process.env.NEWSLETTER_FROM_EMAIL || "CivilEn Publishing <onboarding@resend.dev>";
+    process.env.CONTACT_FROM_EMAIL || "CivilEn Publishing <info@civilenpublishing.com>";
 
   // Debug logging
   console.log("📨 From Email Address:", fromEmail);
