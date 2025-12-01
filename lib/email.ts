@@ -42,6 +42,10 @@ export async function sendEmail({ to, subject, html, text }: EmailData) {
   const fromEmail =
     process.env.NEWSLETTER_FROM_EMAIL || "CivilEn Publishing <onboarding@resend.dev>";
 
+  // Debug logging
+  console.log("📨 From Email Address:", fromEmail);
+  console.log("📨 Environment Variable Set:", !!process.env.NEWSLETTER_FROM_EMAIL);
+
   try {
     const { data, error } = await resend.emails.send({
       from: fromEmail,
