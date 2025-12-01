@@ -73,6 +73,37 @@ export default defineType({
         {
           type: "image",
           options: { hotspot: true },
+          fields: [
+            {
+              name: "alt",
+              type: "string",
+              title: "Alternative Text",
+              description: "Important for SEO and accessibility",
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              name: "caption",
+              type: "string",
+              title: "Caption",
+              description: "Optional caption to display below the image",
+            },
+            {
+              name: "alignment",
+              type: "string",
+              title: "Alignment",
+              description: "How to align the image in the content",
+              options: {
+                list: [
+                  { title: "Left", value: "left" },
+                  { title: "Center", value: "center" },
+                  { title: "Right", value: "right" },
+                  { title: "Full Width", value: "full" },
+                ],
+                layout: "radio",
+              },
+              initialValue: "center",
+            },
+          ],
         },
       ],
       validation: (Rule) => Rule.required(),

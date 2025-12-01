@@ -53,3 +53,4 @@ export async function generateBooksStaticParams() {
     slug: book.slug,
   }));
 }
+

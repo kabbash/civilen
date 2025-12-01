@@ -169,3 +169,4 @@ Article content uses Portable Text for rich text editing. Custom components and 
 - [Sanity Documentation](https://www.sanity.io/docs)
 - [Next.js + Sanity Guide](https://www.sanity.io/guides/nextjs)
 - [Portable Text Guide](https://www.sanity.io/docs/portable-text)
+

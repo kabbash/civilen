@@ -53,3 +53,4 @@ export async function generateArticlesStaticParams() {
     slug: article.slug,
   }));
 }
+

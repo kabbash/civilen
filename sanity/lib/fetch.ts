@@ -49,3 +49,4 @@ export async function getErrataByBook(bookSlug: string) {
 export async function getBooksWithErrata() {
   return await client.fetch(booksWithErrataQuery);
 }
+

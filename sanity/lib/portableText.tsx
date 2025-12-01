@@ -8,16 +8,54 @@ export const portableTextComponents: PortableTextComponents = {
       const imageUrl = urlForImage(value)?.url();
       if (!imageUrl) return null;
 
+      const alignment = value.alignment || "center";
+
+      // Define alignment classes
+      const alignmentClasses = {
+        left: "mr-auto",
+        center: "mx-auto",
+        right: "ml-auto",
+        full: "w-full",
+      };
+
+      // Define width classes based on alignment
+      const widthClasses = {
+        left: "max-w-[300px] md:max-w-[400px]",
+        center: "max-w-full",
+        right: "max-w-[300px] md:max-w-[400px]",
+        full: "w-full max-w-full",
+      };
+
+      // Define caption alignment
+      const captionAlignment = {
+        left: "text-left",
+        center: "text-center",
+        right: "text-right",
+        full: "text-center",
+      };
+
       return (
-        <div className="my-4 md:my-8">
-          <Image
-            src={imageUrl}
-            alt={value.alt || "Article image"}
-            width={800}
-            height={600}
-            className="rounded-lg"
-          />
-        </div>
+        <figure
+          className={`my-6 md:my-10 ${alignmentClasses[alignment as keyof typeof alignmentClasses]} ${widthClasses[alignment as keyof typeof widthClasses]}`}
+        >
+          <div className="relative w-full overflow-hidden rounded-lg">
+            <Image
+              src={imageUrl}
+              alt={value.alt || "Article image"}
+              width={1200}
+              height={800}
+              className="h-auto w-full object-cover"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 868px, 868px"
+            />
+          </div>
+          {value.caption && (
+            <figcaption
+              className={`mt-2 text-sm text-gray-600 italic md:text-base ${captionAlignment[alignment as keyof typeof captionAlignment]}`}
+            >
+              {value.caption}
+            </figcaption>
+          )}
+        </figure>
       );
     },
   },

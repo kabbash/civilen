@@ -165,7 +165,7 @@ export default function ErrataPage() {
                         </div>
                       )}
                       <span className="font-gotham-medium text-lg leading-[27px] md:text-2xl md:leading-9">
-                        {book.title.replace("PE Structural-", "Practical ").replace(" Exams", "")}
+                        {book.title}
                       </span>
                     </button>
                   );

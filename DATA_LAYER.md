@@ -182,3 +182,4 @@ If pages are slow:
 2. Use `generateStaticParams()` for static generation
 3. Consider server components instead of client components
 
+
