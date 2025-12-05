@@ -9,38 +9,57 @@ const REVALIDATE_TIME = 60;
  * Fetch all published errata with revalidation
  */
 export async function getAllErrata(): Promise<Errata[]> {
-  return await client.fetch(
-    errataQuery,
-    {},
-    {
-      next: { revalidate: REVALIDATE_TIME },
-    }
-  );
+  try {
+    const result = await client.fetch(
+      errataQuery,
+      {},
+      {
+        next: { revalidate: REVALIDATE_TIME },
+      }
+    );
+    return result || [];
+  } catch (error) {
+    console.error("Error fetching errata:", error);
+    return [];
+  }
 }
 
 /**
  * Fetch errata for a specific book with revalidation
  */
 export async function getErrataByBook(bookSlug: string): Promise<Errata[]> {
-  return await client.fetch(
-    errataByBookQuery,
-    { bookSlug },
-    {
-      next: { revalidate: REVALIDATE_TIME },
-    }
-  );
+  try {
+    const result = await client.fetch(
+      errataByBookQuery,
+      { bookSlug },
+      {
+        next: { revalidate: REVALIDATE_TIME },
+      }
+    );
+    return result || [];
+  } catch (error) {
+    console.error("Error fetching errata by book:", error);
+    return [];
+  }
 }
 
 /**
  * Fetch all books that have published errata with revalidation
  */
 export async function getBooksWithErrata(): Promise<Book[]> {
-  return await client.fetch(
-    booksWithErrataQuery,
-    {},
-    {
-      next: { revalidate: REVALIDATE_TIME },
-    }
-  );
+  try {
+    const result = await client.fetch(
+      booksWithErrataQuery,
+      {},
+      {
+        next: { revalidate: REVALIDATE_TIME },
+      }
+    );
+    return result || [];
+  } catch (error) {
+    console.error("Error fetching books with errata:", error);
+    return [];
+  }
 }
+
 

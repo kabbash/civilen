@@ -49,3 +49,4 @@ NEXT_PUBLIC_BASE_URL=http://localhost:3000
 - Add all three variables in Vercel project settings
 
 
+

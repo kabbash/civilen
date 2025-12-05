@@ -87,15 +87,33 @@ export async function sendEmail({ to, subject, html, text }: EmailData) {
 }
 
 /**
+ * Generate unsubscribe URL with encoded email
+ */
+export function generateUnsubscribeUrl(email: string): string {
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const encodedEmail = Buffer.from(email).toString("base64");
+  const token = Buffer.from(`${email}-unsubscribe-${process.env.SANITY_WEBHOOK_SECRET || "secret"}`)
+    .toString("base64")
+    .slice(0, 16);
+  return `${baseUrl}/api/unsubscribe?email=${encodedEmail}&token=${token}`;
+}
+
+/**
  * Generate email HTML for new article notification
  */
-export function generateArticleEmail(article: {
-  title: string;
-  slug: string;
-  description?: string;
-}) {
+export function generateArticleEmail(
+  article: {
+    title: string;
+    slug: string;
+    description?: string;
+  },
+  recipientEmail?: string
+) {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
   const articleUrl = `${baseUrl}/articles/${article.slug}`;
+  const unsubscribeUrl = recipientEmail
+    ? generateUnsubscribeUrl(recipientEmail)
+    : `${baseUrl}/api/unsubscribe`;
 
   return {
     subject: `New Article: ${article.title}`,
@@ -127,7 +145,7 @@ export function generateArticleEmail(article: {
           <div class="footer">
             <p>© ${new Date().getFullYear()} CivilEn Publishing. All Rights Reserved.</p>
             <p>CivilEn Publishing 8345 NW 66 ST MIAMI, FL 33166</p>
-            <p><a href="${baseUrl}/unsubscribe">Unsubscribe</a></p>
+            <p><a href="${unsubscribeUrl}">Unsubscribe</a></p>
           </div>
         </div>
       </body>
@@ -141,17 +159,118 @@ export function generateArticleEmail(article: {
       
       Read the full article: ${articleUrl}
       
+      Unsubscribe: ${unsubscribeUrl}
+      
       © ${new Date().getFullYear()} CivilEn Publishing
     `.trim(),
   };
 }
 
 /**
+ * Convert Portable Text blocks to simple HTML for emails
+ */
+interface PortableTextBlock {
+  _type: string;
+  style?: string;
+  children?: Array<{
+    _type: string;
+    text?: string;
+    marks?: string[];
+  }>;
+  listItem?: string;
+}
+
+function portableTextToHtml(blocks: PortableTextBlock[] | undefined): string {
+  if (!blocks || !Array.isArray(blocks)) return "";
+
+  return blocks
+    .map((block) => {
+      if (block._type !== "block" || !block.children) return "";
+
+      const text = block.children
+        .map((child) => {
+          if (child._type !== "span") return "";
+          let content = child.text || "";
+
+          // Apply marks (bold, italic, etc.)
+          if (child.marks?.includes("strong")) {
+            content = `<strong>${content}</strong>`;
+          }
+          if (child.marks?.includes("em")) {
+            content = `<em>${content}</em>`;
+          }
+
+          return content;
+        })
+        .join("");
+
+      // Apply block styles
+      switch (block.style) {
+        case "h1":
+          return `<h1>${text}</h1>`;
+        case "h2":
+          return `<h2>${text}</h2>`;
+        case "h3":
+          return `<h3>${text}</h3>`;
+        case "h4":
+          return `<h4>${text}</h4>`;
+        case "blockquote":
+          return `<blockquote style="border-left: 3px solid #ea5422; padding-left: 15px; margin: 10px 0; color: #555;">${text}</blockquote>`;
+        default:
+          // Handle list items
+          if (block.listItem === "bullet") {
+            return `<li>${text}</li>`;
+          }
+          if (block.listItem === "number") {
+            return `<li>${text}</li>`;
+          }
+          return `<p>${text}</p>`;
+      }
+    })
+    .join("\n");
+}
+
+function portableTextToPlainText(blocks: PortableTextBlock[] | undefined): string {
+  if (!blocks || !Array.isArray(blocks)) return "";
+
+  return blocks
+    .map((block) => {
+      if (block._type !== "block" || !block.children) return "";
+      return block.children
+        .map((child) => (child._type === "span" ? child.text || "" : ""))
+        .join("");
+    })
+    .join("\n\n");
+}
+
+/**
  * Generate email HTML for new book notification
  */
-export function generateBookEmail(book: { title: string; slug: string; description?: string }) {
+export function generateBookEmail(
+  book: {
+    title: string;
+    slug: string;
+    description?: string;
+    fullDescription?: PortableTextBlock[];
+  },
+  recipientEmail?: string
+) {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
   const bookUrl = `${baseUrl}/books/${book.slug}`;
+  const unsubscribeUrl = recipientEmail
+    ? generateUnsubscribeUrl(recipientEmail)
+    : `${baseUrl}/api/unsubscribe`;
+
+  // Convert fullDescription to HTML, fall back to description
+  const descriptionHtml = book.fullDescription
+    ? portableTextToHtml(book.fullDescription)
+    : book.description
+      ? `<p>${book.description}</p>`
+      : "";
+
+  const descriptionText = book.fullDescription
+    ? portableTextToPlainText(book.fullDescription)
+    : book.description || "";
 
   return {
     subject: `New Book Available: ${book.title}`,
@@ -164,8 +283,12 @@ export function generateBookEmail(book: { title: string; slug: string; descripti
           .container { max-width: 600px; margin: 0 auto; padding: 20px; }
           .header { background-color: #ea5422; color: white; padding: 30px 20px; text-align: center; }
           .content { background-color: #ffffff; padding: 30px 20px; }
+          .content h1, .content h2, .content h3, .content h4 { color: #2e2d2d; margin: 15px 0 10px 0; }
+          .content p { margin: 10px 0; }
+          .content ul, .content ol { margin: 10px 0; padding-left: 20px; }
           .button { display: inline-block; background-color: #ea5422; color: white; padding: 12px 30px; text-decoration: none; border-radius: 4px; margin: 20px 0; }
           .footer { background-color: #f5f5f5; padding: 20px; text-align: center; font-size: 12px; color: #666; }
+          .description { margin: 20px 0; padding: 15px; background-color: #f9f9f9; border-radius: 4px; }
         </style>
       </head>
       <body>
@@ -176,14 +299,14 @@ export function generateBookEmail(book: { title: string; slug: string; descripti
           <div class="content">
             <h2>New Book Available!</h2>
             <h3>${book.title}</h3>
-            ${book.description ? `<p>${book.description}</p>` : ""}
+            ${descriptionHtml ? `<div class="description">${descriptionHtml}</div>` : ""}
             <a href="${bookUrl}" class="button">View Book Details</a>
             <p>Discover the latest resources to advance your civil engineering career.</p>
           </div>
           <div class="footer">
             <p>© ${new Date().getFullYear()} CivilEn Publishing. All Rights Reserved.</p>
             <p>CivilEn Publishing 8345 NW 66 ST MIAMI, FL 33166</p>
-            <p><a href="${baseUrl}/unsubscribe">Unsubscribe</a></p>
+            <p><a href="${unsubscribeUrl}">Unsubscribe</a></p>
           </div>
         </div>
       </body>
@@ -193,9 +316,12 @@ export function generateBookEmail(book: { title: string; slug: string; descripti
       New Book Available!
       
       ${book.title}
-      ${book.description || ""}
+      
+      ${descriptionText}
       
       View book details and purchase: ${bookUrl}
+      
+      Unsubscribe: ${unsubscribeUrl}
       
       © ${new Date().getFullYear()} CivilEn Publishing
     `.trim(),

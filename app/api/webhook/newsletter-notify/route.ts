@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { writeClient } from "@/sanity/lib/client";
 import { sendEmail, generateArticleEmail, generateBookEmail } from "@/lib/email";
 
-// Webhook version: 3.0 (new endpoint - no filesystem operations)
+// Webhook version: 4.0 (personalized unsubscribe links)
 // This webhook will be called by Sanity when new content is published
 export async function POST(request: NextRequest) {
   try {
@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { _type, title, slug, description } = body;
+    const { _type, title, slug, description, fullDescription } = body;
 
     // Validate the content type
     if (!["article", "book"].includes(_type)) {
@@ -31,28 +31,44 @@ export async function POST(request: NextRequest) {
     if (subscribers.length === 0) {
       return NextResponse.json({ message: "No active subscribers found" }, { status: 200 });
     }
-    // Send email notifications
-    const emails = subscribers.map((s: { email: string }) => s.email);
-    const emailContent =
-      _type === "article"
-        ? generateArticleEmail({ title, slug: slugString, description })
-        : generateBookEmail({ title, slug: slugString, description });
 
-    const emailResult = await sendEmail({
-      to: emails,
-      subject: emailContent.subject,
-      html: emailContent.html,
-      text: emailContent.text,
-    });
+    // Send individual emails with personalized unsubscribe links
+    let successCount = 0;
+    let failCount = 0;
 
-    console.log(`[Webhook v2.0] Successfully processed ${_type}: ${title}`);
-    console.log(`[Webhook v2.0] Notified ${subscribers.length} subscribers`);
+    for (const subscriber of subscribers as { email: string }[]) {
+      const emailContent =
+        _type === "article"
+          ? generateArticleEmail({ title, slug: slugString, description }, subscriber.email)
+          : generateBookEmail(
+              { title, slug: slugString, description, fullDescription },
+              subscriber.email
+            );
+
+      const emailResult = await sendEmail({
+        to: [subscriber.email],
+        subject: emailContent.subject,
+        html: emailContent.html,
+        text: emailContent.text,
+      });
+
+      if (emailResult.success) {
+        successCount++;
+      } else {
+        failCount++;
+        console.error(`[Webhook v4.0] Failed to send to: ${subscriber.email}`);
+      }
+    }
+
+    console.log(`[Webhook v4.0] Successfully processed ${_type}: ${title}`);
+    console.log(`[Webhook v4.0] Sent: ${successCount}, Failed: ${failCount}`);
 
     return NextResponse.json(
       {
         message: "Notification processed successfully",
         subscriberCount: subscribers.length,
-        emailSent: emailResult.success,
+        emailsSent: successCount,
+        emailsFailed: failCount,
       },
       { status: 200 }
     );

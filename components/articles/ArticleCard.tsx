@@ -15,25 +15,23 @@ export function ArticleCard({ article, imageUrl }: ArticleCardProps) {
   const articleImage = imageUrl || "/images/articles/default-article.jpg";
 
   return (
-    <div className="relative flex h-[380px] w-full max-w-[416px] flex-col items-center justify-end gap-4 rounded-[4px] p-3 md:h-[450px] md:w-[416px] md:gap-6 md:p-3.5">
-      {/* Background Image with Overlay */}
-      <div className="pointer-events-none absolute inset-0 rounded-[4px]">
-        <div className="absolute inset-0 overflow-hidden rounded-[4px]">
-          <Image src={articleImage} alt={article.title} fill className="object-cover" />
-        </div>
-        <div className="absolute inset-0 rounded-[4px] bg-linear-to-b from-[rgba(0,0,0,0.1)] to-[#000000]" />
+    <div className="relative flex h-[380px] w-full max-w-[416px] flex-col items-center justify-end rounded-[4px] overflow-hidden md:h-[450px] md:w-[416px]">
+      {/* Background Image - No dark overlay, image fully visible */}
+      <div className="pointer-events-none absolute inset-0">
+        <Image src={articleImage} alt={article.title} fill className="object-cover" />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 flex w-full flex-1 flex-col items-center justify-end gap-4 bg-[rgba(0,0,0,0.5)] p-2 backdrop-blur-[5px] md:gap-6 md:p-2.5">
-        <div className="flex w-full flex-col gap-2 text-white md:gap-2.5">
-          <h3 className="font-gotham-medium text-xl leading-[30px] break-words md:text-[28px] md:leading-[42px]">
+      {/* Content - Positioned at bottom with frosted glass effect */}
+      <div className="relative z-10 w-full p-3 md:p-4">
+        {/* Frosted glass card for text */}
+        <div className="rounded-lg bg-white/85 p-4 shadow-lg backdrop-blur-md md:p-5">
+          <h3 className="font-gotham-medium mb-3 text-lg leading-[26px] break-words text-[#2e2d2d] md:mb-4 md:text-xl md:leading-[30px]">
             {article.title}
           </h3>
+          <Link href={`/articles/${article.slug}`} className="block">
+            <PrimaryButton className="w-full">Read Article</PrimaryButton>
+          </Link>
         </div>
-        <Link href={`/articles/${article.slug}`} className="w-full">
-          <PrimaryButton className="w-full">Read Article</PrimaryButton>
-        </Link>
       </div>
     </div>
   );
