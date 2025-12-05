@@ -66,30 +66,7 @@ export async function GET(request: NextRequest) {
   const token = searchParams.get("token");
 
   if (!encodedEmail) {
-    // Return a simple HTML page for manual unsubscribe
-    return new NextResponse(
-      `<!DOCTYPE html>
-      <html>
-      <head>
-        <title>Unsubscribe - CivilEn Publishing</title>
-        <style>
-          body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; background: #f5f5f5; }
-          .container { text-align: center; padding: 40px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-width: 400px; }
-          h1 { color: #ea5422; margin-bottom: 20px; }
-          p { color: #666; margin-bottom: 20px; }
-          a { color: #ea5422; text-decoration: none; }
-        </style>
-      </head>
-      <body>
-        <div class="container">
-          <h1>Unsubscribe</h1>
-          <p>Invalid unsubscribe link. Please use the link from your email.</p>
-          <a href="/">← Back to Homepage</a>
-        </div>
-      </body>
-      </html>`,
-      { status: 400, headers: { "Content-Type": "text/html" } }
-    );
+    return NextResponse.redirect(new URL("/unsubscribe", request.url));
   }
 
   try {
@@ -104,29 +81,7 @@ export async function GET(request: NextRequest) {
         .toString("base64")
         .slice(0, 16);
       if (token !== expectedToken) {
-        return new NextResponse(
-          `<!DOCTYPE html>
-          <html>
-          <head>
-            <title>Unsubscribe Failed - CivilEn Publishing</title>
-            <style>
-              body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; background: #f5f5f5; }
-              .container { text-align: center; padding: 40px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-width: 400px; }
-              h1 { color: #ea5422; margin-bottom: 20px; }
-              p { color: #666; margin-bottom: 20px; }
-              a { color: #ea5422; text-decoration: none; }
-            </style>
-          </head>
-          <body>
-            <div class="container">
-              <h1>Invalid Link</h1>
-              <p>This unsubscribe link is invalid or has expired.</p>
-              <a href="/">← Back to Homepage</a>
-            </div>
-          </body>
-          </html>`,
-          { status: 400, headers: { "Content-Type": "text/html" } }
-        );
+        return NextResponse.redirect(new URL("/unsubscribe?error=invalid", request.url));
       }
     }
 
@@ -141,57 +96,10 @@ export async function GET(request: NextRequest) {
       console.log(`[Unsubscribe] One-click unsubscribed: ${email}`);
     }
 
-    // Return success page
-    return new NextResponse(
-      `<!DOCTYPE html>
-      <html>
-      <head>
-        <title>Unsubscribed - CivilEn Publishing</title>
-        <style>
-          body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; background: #f5f5f5; }
-          .container { text-align: center; padding: 40px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-width: 400px; }
-          h1 { color: #ea5422; margin-bottom: 20px; }
-          .checkmark { font-size: 48px; margin-bottom: 20px; }
-          p { color: #666; margin-bottom: 20px; }
-          a { color: #ea5422; text-decoration: none; }
-        </style>
-      </head>
-      <body>
-        <div class="container">
-          <div class="checkmark">✓</div>
-          <h1>Successfully Unsubscribed</h1>
-          <p>You have been removed from our newsletter. We're sorry to see you go!</p>
-          <a href="/">← Back to Homepage</a>
-        </div>
-      </body>
-      </html>`,
-      { status: 200, headers: { "Content-Type": "text/html" } }
-    );
+    // Redirect to success page
+    return NextResponse.redirect(new URL("/unsubscribe?success=true", request.url));
   } catch (error) {
     console.error("One-click unsubscribe error:", error);
-    return new NextResponse(
-      `<!DOCTYPE html>
-      <html>
-      <head>
-        <title>Error - CivilEn Publishing</title>
-        <style>
-          body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; background: #f5f5f5; }
-          .container { text-align: center; padding: 40px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-width: 400px; }
-          h1 { color: #ea5422; margin-bottom: 20px; }
-          p { color: #666; margin-bottom: 20px; }
-          a { color: #ea5422; text-decoration: none; }
-        </style>
-      </head>
-      <body>
-        <div class="container">
-          <h1>Something Went Wrong</h1>
-          <p>We couldn't process your unsubscribe request. Please try again later.</p>
-          <a href="/">← Back to Homepage</a>
-        </div>
-      </body>
-      </html>`,
-      { status: 500, headers: { "Content-Type": "text/html" } }
-    );
+    return NextResponse.redirect(new URL("/unsubscribe?error=true", request.url));
   }
 }
-
