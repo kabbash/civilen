@@ -2,12 +2,21 @@ import { SectionHeader } from "./SectionHeader";
 import { ArticleCard } from "@/components/articles/ArticleCard";
 import { Article } from "@/types";
 import Link from "next/link";
+import { urlForImage } from "@/sanity/lib/image";
 
 interface ArticlesSectionProps {
   articles: Article[];
 }
 
 export function ArticlesSection({ articles }: ArticlesSectionProps) {
+  // Get article image URL from Sanity
+  const getArticleImage = (article: Article) => {
+    if (article.image) {
+      return urlForImage(article.image)?.url() || "/images/articles/default-article.jpg";
+    }
+    return "/images/articles/default-article.jpg";
+  };
+
   return (
     <section className="container mx-auto px-4 py-12 lg:px-20 lg:py-16">
       <SectionHeader>Insider Strategies & Exam Insights</SectionHeader>
@@ -18,7 +27,7 @@ export function ArticlesSection({ articles }: ArticlesSectionProps) {
           <ArticleCard
             key={article._id || article.slug}
             article={article}
-            // Add custom image URLs if available
+            imageUrl={getArticleImage(article)}
           />
         ))}
       </div>
