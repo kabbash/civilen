@@ -4,6 +4,26 @@ export default defineType({
   name: "errata",
   title: "Errata",
   type: "document",
+  orderings: [
+    {
+      title: "Display Order",
+      name: "orderAsc",
+      by: [
+        { field: "order", direction: "asc" },
+        { field: "dateReported", direction: "desc" },
+      ],
+    },
+    {
+      title: "Date Reported, New",
+      name: "dateReportedDesc",
+      by: [{ field: "dateReported", direction: "desc" }],
+    },
+    {
+      title: "Title",
+      name: "titleAsc",
+      by: [{ field: "title", direction: "asc" }],
+    },
+  ],
   fields: [
     defineField({
       name: "title",
@@ -64,6 +84,13 @@ export default defineType({
       },
       initialValue: "published",
     }),
+    defineField({
+      name: "order",
+      title: "Display Order",
+      type: "number",
+      description: "Order in which to display (lower numbers first)",
+      initialValue: 0,
+    }),
   ],
   preview: {
     select: {
@@ -80,5 +107,3 @@ export default defineType({
     },
   },
 });
-
-

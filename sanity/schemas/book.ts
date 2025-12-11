@@ -4,6 +4,26 @@ export default defineType({
   name: "book",
   title: "Book",
   type: "document",
+  orderings: [
+    {
+      title: "Display Order",
+      name: "orderAsc",
+      by: [
+        { field: "order", direction: "asc" },
+        { field: "publishedAt", direction: "desc" },
+      ],
+    },
+    {
+      title: "Published Date, New",
+      name: "publishedAtDesc",
+      by: [{ field: "publishedAt", direction: "desc" }],
+    },
+    {
+      title: "Title",
+      name: "titleAsc",
+      by: [{ field: "title", direction: "asc" }],
+    },
+  ],
   fields: [
     defineField({
       name: "title",
@@ -125,5 +145,3 @@ export default defineType({
     },
   },
 });
-
-

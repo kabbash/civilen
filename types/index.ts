@@ -29,6 +29,7 @@ export interface Article {
   publishedDate?: string;
   publishedAt?: string;
   featured?: boolean;
+  order?: number;
 }
 
 export interface ContactFormData {
@@ -54,4 +55,5 @@ export interface Errata {
   correction: string;
   dateReported: string;
   status?: string;
+  order?: number;
 }

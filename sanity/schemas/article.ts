@@ -4,6 +4,26 @@ export default defineType({
   name: "article",
   title: "Article",
   type: "document",
+  orderings: [
+    {
+      title: "Display Order",
+      name: "orderAsc",
+      by: [
+        { field: "order", direction: "asc" },
+        { field: "publishedAt", direction: "desc" },
+      ],
+    },
+    {
+      title: "Published Date, New",
+      name: "publishedAtDesc",
+      by: [{ field: "publishedAt", direction: "desc" }],
+    },
+    {
+      title: "Title",
+      name: "titleAsc",
+      by: [{ field: "title", direction: "asc" }],
+    },
+  ],
   fields: [
     defineField({
       name: "title",
@@ -121,6 +141,13 @@ export default defineType({
       type: "boolean",
       description: "Display this article on the homepage",
       initialValue: false,
+    }),
+    defineField({
+      name: "order",
+      title: "Display Order",
+      type: "number",
+      description: "Order in which to display (lower numbers first)",
+      initialValue: 0,
     }),
   ],
   preview: {
