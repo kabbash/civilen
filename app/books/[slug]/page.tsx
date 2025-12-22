@@ -112,3 +112,4 @@ export default async function BookDetailPage({ params }: BookDetailPageProps) {
     </main>
   );
 }
+

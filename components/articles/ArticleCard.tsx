@@ -36,3 +36,4 @@ export function ArticleCard({ article, imageUrl }: ArticleCardProps) {
     </div>
   );
 }
+

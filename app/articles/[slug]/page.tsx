@@ -104,3 +104,4 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
     </main>
   );
 }
+

@@ -84,3 +84,4 @@ export function BookCard({ book, showLongDescription }: BookCardProps) {
     </div>
   );
 }
+
