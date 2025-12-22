@@ -1,0 +1,7 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Orange background with diagonal corner -->
+  <path d="M2 2H22L30 10V30H2V2Z" fill="#EA5422"/>
+  <!-- White E shape inside -->
+  <path d="M6 6H26L22 10H10V13H20L24 9V15L20 19H10V22H22L26 18V26H6V6Z" fill="white"/>
+</svg>
+
