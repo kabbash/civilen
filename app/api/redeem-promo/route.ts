@@ -132,21 +132,35 @@ export async function POST(request: Request) {
       // Update usage count
       await writeClient.patch(promoCode._id).inc({ usageCount: 1 }).commit();
 
-      // Create purchaser record
-      await writeClient.create({
-        _type: "purchaser",
-        email: email,
-        promoCode: {
-          _type: "reference",
-          _ref: promoCode._id,
-        },
-        promoCodeUsed: code.toUpperCase(),
-        book: {
-          _type: "reference",
-          _ref: promoCode.book._id,
-        },
-        redeemedAt: new Date().toISOString(),
-      });
+      // Check if purchaser already exists with this email and promo code
+      const existingPurchaser = await writeClient.fetch(
+        `*[_type == "purchaser" && email == $email && promoCode._ref == $promoCodeId][0]`,
+        { email, promoCodeId: promoCode._id }
+      );
+
+      if (existingPurchaser) {
+        // Update existing purchaser's redemption timestamp
+        await writeClient
+          .patch(existingPurchaser._id)
+          .set({ redeemedAt: new Date().toISOString() })
+          .commit();
+      } else {
+        // Create new purchaser record
+        await writeClient.create({
+          _type: "purchaser",
+          email: email,
+          promoCode: {
+            _type: "reference",
+            _ref: promoCode._id,
+          },
+          promoCodeUsed: code.toUpperCase(),
+          book: {
+            _type: "reference",
+            _ref: promoCode.book._id,
+          },
+          redeemedAt: new Date().toISOString(),
+        });
+      }
     } catch (patchError) {
       // Log but don't fail the request
       console.error("Failed to update usage count or create purchaser:", patchError);
