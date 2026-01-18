@@ -9,7 +9,7 @@ interface BooksSectionProps {
 
 export function BooksSection({ books }: BooksSectionProps) {
   return (
-    <section className="container mx-auto px-4 py-12 lg:px-20 lg:py-16">
+    <section className="container mx-auto scroll-mt-24 px-4 py-12 lg:px-20 lg:py-16" id="books">
       <SectionHeader>Your PE Exam Practice Starts Here</SectionHeader>
 
       {/* 2 Books side by side */}

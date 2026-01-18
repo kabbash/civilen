@@ -27,7 +27,8 @@ export function BookCard({ book, showLongDescription }: BookCardProps) {
 
   return (
     <div
-      className="relative mx-auto flex w-full max-w-[632px] flex-col items-center gap-4 rounded-[4px] p-4 transition-all duration-300 md:gap-6 md:p-8"
+      className="relative mx-auto flex w-full max-w-[632px] scroll-mt-24 flex-col items-center gap-4 rounded-[4px] p-4 transition-all duration-300 md:gap-6 md:p-8"
+      id={book.slug}
       style={{
         boxShadow: isHovered ? "0px 4px 15px 0px rgba(190, 64, 22, 0.25)" : "none",
       }}
@@ -89,14 +90,9 @@ export function BookCard({ book, showLongDescription }: BookCardProps) {
         {hasSample && (
           <button
             onClick={() => setShowSamplePopup(true)}
-            className="font-gotham-medium flex items-center gap-2 rounded-md border-2 border-primary px-5 py-2.5 text-sm text-primary transition-all hover:bg-primary hover:text-white md:px-6 md:py-3 md:text-base"
+            className="font-gotham-medium border-primary text-primary hover:bg-primary flex items-center gap-2 rounded-md border-2 px-5 py-2.5 text-sm transition-all hover:text-white md:px-6 md:py-3 md:text-base"
           >
-            <svg
-              className="h-5 w-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
+            <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -121,4 +117,3 @@ export function BookCard({ book, showLongDescription }: BookCardProps) {
     </div>
   );
 }
-
