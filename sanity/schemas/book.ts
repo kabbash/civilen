@@ -118,6 +118,12 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "reviewUrl",
+      title: "Review URL",
+      type: "url",
+      description: "The Amazon review URL where users can leave a review for this book",
+    }),
+    defineField({
       name: "publishedAt",
       title: "Published At",
       type: "datetime",
@@ -136,6 +142,15 @@ export default defineType({
       type: "number",
       description: "Order in which to display (lower numbers first)",
       initialValue: 0,
+    }),
+    defineField({
+      name: "samplePdf",
+      title: "Sample PDF",
+      type: "file",
+      description: "A free sample PDF that users can download after subscribing",
+      options: {
+        accept: ".pdf",
+      },
     }),
   ],
   preview: {

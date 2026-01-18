@@ -9,7 +9,8 @@ export const booksQuery = groq`*[_type == "book"] | order(order asc, publishedAt
   description,
   amazonLink,
   featured,
-  order
+  order,
+  "samplePdfUrl": samplePdf.asset->url
 }`;
 
 export const bookBySlugQuery = groq`*[_type == "book" && slug.current == $slug][0] {
@@ -23,7 +24,8 @@ export const bookBySlugQuery = groq`*[_type == "book" && slug.current == $slug][
   amazonLink,
   insideBook,
   perfectFor,
-  publishedAt
+  publishedAt,
+  "samplePdfUrl": samplePdf.asset->url
 }`;
 
 export const featuredBooksQuery = groq`*[_type == "book" && featured == true && defined(publishedAt)] | order(order asc, publishedAt desc) [0...2] {
@@ -33,7 +35,8 @@ export const featuredBooksQuery = groq`*[_type == "book" && featured == true && 
   coverImage,
   description,
   amazonLink,
-  order
+  order,
+  "samplePdfUrl": samplePdf.asset->url
 }`;
 
 // Article queries
@@ -103,3 +106,47 @@ export const booksWithErrataQuery = groq`*[_type == "book" && _id in *[_type == 
   "slug": slug.current,
   "errataCount": count(*[_type == "errata" && book._ref == ^._id && status == "published"])
 } | order(order asc, title asc)`;
+
+// Banner queries - simple: if isActive is true, banner is shown
+export const bannersQuery = groq`*[_type == "banner" && isActive == true] | order(order asc) {
+  _id,
+  title,
+  alt,
+  desktopImage,
+  mobileImage,
+  link,
+  ctaText,
+  order
+}`;
+
+export const allBannersQuery = groq`*[_type == "banner"] | order(order asc) {
+  _id,
+  title,
+  alt,
+  desktopImage,
+  mobileImage,
+  link,
+  ctaText,
+  isActive,
+  order
+}`;
+
+// Promo Code queries
+export const promoCodeByNameQuery = groq`*[_type == "promoCode" && lower(name.current) == lower($name) && active == true][0] {
+  _id,
+  "name": name.current,
+  code,
+  book->{
+    _id,
+    title,
+    "slug": slug.current,
+    reviewUrl
+  },
+  "reviewUrl": book->reviewUrl,
+  "freeBookPdfUrl": freeBookPdf.asset->url,
+  "freeBookPdfFilename": freeBookPdf.asset->originalFilename,
+  active,
+  expiresAt,
+  usageLimit,
+  usageCount
+}`;

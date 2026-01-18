@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { PrimaryButton } from "@/components/ui/primary-button";
+import { SampleDownloadPopup } from "@/components/books/SampleDownloadPopup";
 import type { Book } from "@/types";
 import { urlForImage } from "@/sanity/lib/image";
 
@@ -14,6 +15,9 @@ interface BookCardProps {
 
 export function BookCard({ book, showLongDescription }: BookCardProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const [showSamplePopup, setShowSamplePopup] = useState(false);
+
+  const hasSample = Boolean(book.samplePdfUrl);
 
   // Handle both string URLs and Sanity image objects
   const coverImageUrl =
@@ -77,10 +81,43 @@ export function BookCard({ book, showLongDescription }: BookCardProps) {
         </p>
       </div>
 
-      {/* Button */}
-      <Link href={`/books/${book.slug}`} className="relative z-10">
-        <PrimaryButton>View Details</PrimaryButton>
-      </Link>
+      {/* Buttons */}
+      <div className="relative z-10 flex flex-col items-center gap-3 sm:flex-row">
+        <Link href={`/books/${book.slug}`}>
+          <PrimaryButton>View Details</PrimaryButton>
+        </Link>
+        {hasSample && (
+          <button
+            onClick={() => setShowSamplePopup(true)}
+            className="font-gotham-medium flex items-center gap-2 rounded-md border-2 border-primary px-5 py-2.5 text-sm text-primary transition-all hover:bg-primary hover:text-white md:px-6 md:py-3 md:text-base"
+          >
+            <svg
+              className="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+              />
+            </svg>
+            Download Sample
+          </button>
+        )}
+      </div>
+
+      {/* Sample Download Popup */}
+      {hasSample && (
+        <SampleDownloadPopup
+          bookId={book._id || book.id || ""}
+          bookTitle={book.title}
+          isOpen={showSamplePopup}
+          onClose={() => setShowSamplePopup(false)}
+        />
+      )}
     </div>
   );
 }

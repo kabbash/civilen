@@ -65,6 +65,12 @@ export async function POST(request: NextRequest) {
         revalidatedPaths.push("/errata");
         break;
 
+      case "banner":
+        // Revalidate homepage where banners are displayed
+        revalidatePath("/");
+        revalidatedPaths.push("/");
+        break;
+
       default:
         // For unknown types, revalidate homepage
         revalidatePath("/");

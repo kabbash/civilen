@@ -29,8 +29,14 @@ export {
   getBooksWithErrata,
 } from "./errata";
 
+// Banners
+export {
+  getActiveBanners,
+  getAllBanners,
+} from "./banners";
 
-
-
-
+// Promo Codes
+export {
+  getPromoCodeByName,
+} from "./promoCodes";
 

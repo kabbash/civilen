@@ -34,6 +34,7 @@ export default defineType({
         list: [
           { title: "Website Footer", value: "footer" },
           { title: "Contact Page", value: "contact" },
+          { title: "Book Sample Download", value: "book-sample" },
           { title: "Manual", value: "manual" },
         ],
       },
@@ -54,6 +55,7 @@ export default defineType({
     },
   },
 });
+
 
 
 

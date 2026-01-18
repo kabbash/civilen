@@ -10,6 +10,7 @@ export interface Book {
   description: string;
   coverImage: string | SanityImageType;
   amazonLink: string;
+  reviewUrl?: string;
   publishedDate?: string;
   publishedAt?: string;
   isbn?: string;
@@ -17,6 +18,8 @@ export interface Book {
   longDescription?: string;
   featured?: boolean;
   order?: number;
+  samplePdf?: SanityFileAsset;
+  samplePdfUrl?: string;
 }
 
 export interface Article {
@@ -58,3 +61,43 @@ export interface Errata {
   order?: number;
 }
 
+export interface Banner {
+  _id: string;
+  title: string;
+  alt: string;
+  desktopImage: SanityImageType;
+  mobileImage: SanityImageType;
+  link: string;
+  ctaText: string;
+  isActive?: boolean;
+  order?: number;
+}
+
+export interface SanityFileAsset {
+  _type: "file";
+  asset: {
+    _ref: string;
+    _type: "reference";
+    url?: string;
+  };
+}
+
+export interface PromoCode {
+  _id: string;
+  name: string;
+  code: string;
+  book: {
+    _id: string;
+    title: string;
+    slug: string;
+    reviewUrl?: string;
+  };
+  reviewUrl?: string; // Derived from book.reviewUrl
+  freeBookPdf: SanityFileAsset;
+  freeBookPdfUrl?: string;
+  freeBookPdfFilename?: string; // Original filename from Sanity asset
+  active: boolean;
+  expiresAt?: string;
+  usageLimit?: number;
+  usageCount: number;
+}
