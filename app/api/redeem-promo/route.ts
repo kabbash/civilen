@@ -161,9 +161,37 @@ export async function POST(request: Request) {
           redeemedAt: new Date().toISOString(),
         });
       }
+
+      // Add purchaser to subscribers if they don't already exist
+      const existingSubscriber = await writeClient.fetch(
+        `*[_type == "subscriber" && email == $email][0]`,
+        { email }
+      );
+
+      if (existingSubscriber) {
+        // Reactivate if inactive
+        if (!existingSubscriber.active) {
+          await writeClient
+            .patch(existingSubscriber._id)
+            .set({ active: true, subscribedAt: new Date().toISOString() })
+            .commit();
+        }
+      } else {
+        // Create new subscriber
+        await writeClient.create({
+          _type: "subscriber",
+          email,
+          source: "promo-redeem",
+          subscribedAt: new Date().toISOString(),
+          active: true,
+        });
+      }
     } catch (patchError) {
       // Log but don't fail the request
-      console.error("Failed to update usage count or create purchaser:", patchError);
+      console.error(
+        "Failed to update usage count, create purchaser, or add subscriber:",
+        patchError
+      );
     }
 
     return NextResponse.json({

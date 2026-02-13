@@ -35,6 +35,7 @@ export default defineType({
           { title: "Website Footer", value: "footer" },
           { title: "Contact Page", value: "contact" },
           { title: "Book Sample Download", value: "book-sample" },
+          { title: "Promo Code Redemption", value: "promo-redeem" },
           { title: "Manual", value: "manual" },
         ],
       },
