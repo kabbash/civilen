@@ -24,7 +24,7 @@ export const BannersStrip = ({ banners }: BannersStripProps) => {
   const displayBanners: ImageBanner[] = banners.map((b) => ({
     id: b._id,
     image: urlForImage(b.desktopImage)?.width(1920).height(400).url() || "",
-    mobileImage: urlForImage(b.mobileImage)?.width(750).height(400).url() || "",
+    mobileImage: urlForImage(b.mobileImage)?.width(750).url() || "",
     alt: b.alt,
     link: b.link,
     ctaText: b.ctaText,
@@ -48,55 +48,63 @@ export const BannersStrip = ({ banners }: BannersStripProps) => {
 
   return (
     <div
-      className="group relative w-full overflow-hidden"
+      className="group relative w-full min-w-0 overflow-hidden"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      {/* Banner Images */}
-      <div className="relative h-[120px] w-full md:h-[160px] lg:h-[200px]">
-        {displayBanners.map((b, index) => (
-          <div
-            key={b.id}
-            className={`absolute inset-0 transition-all duration-700 ease-in-out ${
-              index === currentBanner
-                ? "translate-x-0 opacity-100"
-                : index < currentBanner
-                  ? "-translate-x-full opacity-0"
-                  : "translate-x-full opacity-0"
-            }`}
-          >
-            {/* Responsive images: mobile vs desktop */}
-            {b.mobileImage ? (
-              <picture>
-                <source media="(min-width: 768px)" srcSet={b.image} />
-                <img
-                  src={b.mobileImage}
-                  alt={b.alt}
-                  className="h-full w-full object-cover object-left"
-                />
-              </picture>
-            ) : (
-              <img
-                src={b.image}
-                alt={b.alt}
-                className="h-full w-full object-cover object-left md:object-center"
+      {/* Banner Images - taller on mobile to show full image, no overlay blocking content */}
+      <div className="relative w-full min-w-0 bg-[#1e293b]">
+        <div className="relative aspect-[15/8] w-full md:aspect-[24/5] md:min-h-[140px] lg:min-h-[180px]">
+          {displayBanners.map((b, index) => (
+            <div
+              key={b.id}
+              className={`absolute inset-0 min-w-0 transition-all duration-700 ease-in-out ${
+                index === currentBanner
+                  ? "translate-x-0 opacity-100"
+                  : index < currentBanner
+                    ? "-translate-x-full opacity-0"
+                    : "translate-x-full opacity-0"
+              }`}
+            >
+              {/* Full banner is tap target on mobile; desktop uses button */}
+              <a
+                href={b.link}
+                className="absolute inset-0 z-10 md:pointer-events-none"
+                aria-label={`${b.alt} - ${b.ctaText}`}
               />
-            )}
-            {/* CTA Button */}
-            <div className="absolute inset-0 flex items-center justify-end pr-4 md:pr-8 lg:pr-16">
-              <Button
-                asChild
-                size="sm"
-                className="text-foreground bg-white px-3 py-1.5 text-xs font-semibold shadow-md transition-transform hover:scale-105 hover:bg-white/90 md:px-4 md:py-2 md:text-sm"
-              >
-                <a href={b.link}>
-                  {b.ctaText}
-                  <ArrowRight className="ml-1.5 h-3 w-3 md:h-4 md:w-4" />
-                </a>
-              </Button>
+              {/* Responsive images: mobile: object-contain for full visibility, desktop: object-cover */}
+              {b.mobileImage ? (
+                <picture className="block h-full w-full">
+                  <source media="(min-width: 768px)" srcSet={b.image} />
+                  <img
+                    src={b.mobileImage}
+                    alt={b.alt}
+                    className="block h-full w-full object-contain object-center"
+                  />
+                </picture>
+              ) : (
+                <img
+                  src={b.image}
+                  alt={b.alt}
+                  className="h-full max-w-full w-full object-cover object-left md:object-center"
+                />
+              )}
+              {/* CTA Button - lower right on mobile to not hide text, compact size */}
+              <div className="absolute inset-0 z-20 flex items-end justify-end pb-5 pr-3 md:items-center md:pb-0 md:pr-4 lg:pr-8">
+                <Button
+                  asChild
+                  size="sm"
+                  className="text-foreground inline-flex w-fit shrink-0 bg-white px-2 py-1 text-[11px] font-semibold shadow-md transition-transform hover:scale-105 hover:bg-white/90 md:w-auto md:px-4 md:py-2 md:text-sm"
+                >
+                  <a href={b.link} className="pointer-events-auto whitespace-nowrap">
+                    {b.ctaText}
+                    <ArrowRight className="ml-1 h-2.5 w-2.5 md:ml-1.5 md:h-4 md:w-4" />
+                  </a>
+                </Button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       {/* Navigation Arrows */}

@@ -39,13 +39,13 @@ export default async function HomePage({ searchParams }: HomePageProps) {
   ]);
 
   return (
-    <main className="min-h-screen">
+    <>
       {/* Promo Code Popup */}
       <Suspense fallback={null}>
         <PromoCodeWrapper promoCode={promoCode} />
       </Suspense>
 
-      {/* Banners Strip - Only show if banners exist in Sanity */}
+      {/* Banners Strip */}
       {banners.length > 0 && <BannersStrip banners={banners} />}
 
       {/* Hero Section */}
@@ -62,6 +62,6 @@ export default async function HomePage({ searchParams }: HomePageProps) {
 
       {/* Features/Stats Section - At Bottom */}
       <FeaturesSection />
-    </main>
+    </>
   );
 }

@@ -11,21 +11,21 @@ export function HeroSection() {
         {/* Content Container */}
         <div className="flex min-h-0 flex-col lg:min-h-[772px] lg:flex-row lg:items-center">
           {/* Left Side - Text Content */}
-          <div className="z-10 w-full shrink-0 px-6 py-10 lg:w-auto lg:px-20 lg:py-20">
-            <div className="max-w-[780px]">
+          <div className="z-10 flex w-full shrink-0 flex-col items-center px-6 py-10 text-center lg:items-start lg:px-20 lg:py-20 lg:text-left">
+            <div className="w-full max-w-[780px]">
               {/* Hero Text */}
               <div className="mb-8 flex flex-col gap-2 lg:mb-12">
                 <h1 className="font-gotham-bold text-3xl text-black sm:text-4xl lg:text-[96px] lg:leading-[1.1]">
                   Master the PE Structural Exam
                 </h1>
-                <p className="font-gotham-book max-w-[600px] rounded-lg bg-white/60 px-3 py-2 text-base leading-[27px] text-black backdrop-blur-sm lg:bg-transparent lg:px-0 lg:py-0 lg:text-lg lg:backdrop-blur-none">
+                <p className="font-gotham-book mx-auto w-full max-w-[600px] rounded-lg bg-white/60 px-4 py-3 text-base leading-[27px] text-black backdrop-blur-sm lg:mx-0 lg:bg-transparent lg:px-0 lg:py-0 lg:text-lg lg:backdrop-blur-none">
                   Uncompromising practice exams designed to perfectly mirror the NCEES CBT format.
                   Get exam-ready with materials built by practicing structural engineers.
                 </p>
               </div>
 
               {/* CTA Button */}
-              <Link href="/books" className="inline-flex flex-col items-start gap-1">
+              <Link href="/books" className="inline-flex flex-col items-center gap-1 lg:items-start">
                 <PrimaryButton className="w-auto">View Practice Exams & Solutions</PrimaryButton>
 
                 {/* NCEES Badge */}
